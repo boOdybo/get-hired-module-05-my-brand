@@ -1,0 +1,1268 @@
+<!doctype html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<meta content="#f3fafb" name="theme-color"/>
+<title>GET HIRED | Module 05 — MY BRAND</title>
+<style>
+:root{
+ --ink:#102f46;--muted:#526f7e;--teal:#087f7a;--blue:#286c9e;
+ --bg:#f3fafb;--line:#bfdfdc;--navy:#07354a;--gold:#fff2d9;
+ --paper:#fff;--soft:#e7f7f3;--shadow:0 10px 32px rgba(5,58,76,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:"Cairo","Noto Sans Arabic",Tahoma,Arial,sans-serif;direction:rtl;color:var(--ink);background:var(--bg)}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid #e39a28;outline-offset:2px}
+#app{height:100dvh;min-height:100svh;display:flex;flex-direction:column;overflow:hidden}
+.topbar{flex:0 0 auto;min-height:58px;padding:8px clamp(10px,2vw,28px);display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fff;border-bottom:1px solid #d5e9e7;z-index:5}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;color:#0b6870;font-size:clamp(12px,1vw,17px);white-space:nowrap}
+.brand-mark{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:#0b8b85;color:#fff;font-weight:1000}
+.modebar,.top-actions{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.modebar button,.top-actions button{border:1px solid #c5dfdc;background:#fff;color:#16485b;border-radius:10px;padding:8px 12px;font-weight:800;font-size:clamp(12px,.95vw,15px)}
+.modebar button.active{background:#0a7776;color:white;border-color:#0a7776}
+#deck{position:relative;flex:1 1 auto;min-height:0;overflow:hidden}
+.slide{display:none;position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;background:radial-gradient(ellipse 75% 60% at 8% 0%,#d9f3f1,transparent 75%),linear-gradient(120deg,#f5fcfc,#fff 58%,#edf8f8);padding:clamp(16px,2.8vw,48px) clamp(16px,4vw,72px) 24px}
+.slide.active{display:flex;flex-direction:column;animation:slidein .22s ease}
+@keyframes slidein{from{opacity:.35;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.slide-topline{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-shrink:0;font-weight:850;color:#0a6c70;font-size:clamp(11px,.95vw,16px);margin-bottom:clamp(8px,1.2vh,16px)}
+.slide-topline>div{display:flex;align-items:center;gap:8px;min-width:0}
+.slide-number{width:36px;height:36px;border:2px solid #0b8d86;border-radius:12px;display:inline-grid;place-items:center;font-weight:900;background:#fff;flex-shrink:0;direction:ltr}
+.section-label{letter-spacing:.04em;overflow-wrap:anywhere}
+.module-pill{border:1px solid #b9dcd7;background:#e8f8f5;padding:6px 12px;border-radius:999px;font-weight:850;white-space:nowrap}
+.heading{margin-bottom:clamp(10px,1.6vh,20px);flex-shrink:0}
+.heading h1{font-size:clamp(27px,3vw,54px);line-height:1.22;margin:0 0 7px;font-weight:900;letter-spacing:-.4px;overflow-wrap:anywhere}
+.subtitle{font-size:clamp(15px,1.25vw,23px);color:#4b6d7e;margin:0;line-height:1.5}
+.body{flex:1 0 auto;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:clamp(12px,1.5vh,20px);width:100%}
+.body>*{max-width:100%;min-width:0}
+.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:clamp(14px,1.8vw,26px);box-shadow:var(--shadow)}
+.panel h3{font-size:clamp(18px,1.45vw,27px);margin:0 0 9px}
+.panel p,.panel li{font-size:clamp(14px,1.05vw,20px);line-height:1.55;margin:4px 0}
+.panel.mint{background:#e6f7f3}.panel.blue{background:#eaf3fb}.panel.gold{background:#fff3d9}
+.grid{display:grid;gap:12px;min-width:0}
+.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.info-card{min-width:0;background:#fff;border:1px solid #c5e2df;border-radius:16px;padding:clamp(13px,1.3vw,20px);box-shadow:0 4px 16px rgba(5,58,76,.035)}
+.info-card b{display:block;color:#0a7776;font-size:clamp(16px,1.15vw,22px);margin:5px 0}
+.info-card p{font-size:clamp(14px,1vw,19px);line-height:1.5;margin:4px 0;overflow-wrap:anywhere}
+.card-tag{display:block;color:#54717e;font-size:11px;letter-spacing:.07em;font-weight:900}
+.callout{background:#dff4ef;border-right:6px solid #078e88;border-radius:13px;padding:12px 17px;font-size:clamp(14px,1.08vw,20px);line-height:1.55}
+.callout.warning{background:#fff1df;border-color:#d98a2c;color:#67420f}
+.small-note{font-size:13px!important;color:#58727e}
+.english,.prompt-box pre,.bad,.good{font-family:Arial,sans-serif;direction:ltr;text-align:left;unicode-bidi:plaintext}
+.hero-layout{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:clamp(16px,3vw,36px);min-height:360px}
+.eyebrow{letter-spacing:.08em;color:#0d8d86;font-size:clamp(13px,1.05vw,19px);font-weight:900}
+.hero-title{font-size:clamp(34px,3.8vw,66px);line-height:1.24;margin:14px 0;font-weight:950}
+.hero-title em{font-style:normal;color:#098d87}
+.lead{font-size:clamp(17px,1.4vw,26px);color:#476a79;line-height:1.65;margin:0}
+.hero-visual{background:#fff;border:1px solid var(--line);border-radius:24px;padding:14px;box-shadow:0 12px 35px #063a4c10}
+.hero-visual svg{width:100%;height:auto;max-height:42vh;display:block}
+.visual-caption{text-align:center;color:#52727e;font-size:clamp(12px,1vw,16px);padding:8px}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.tag-row span{font-size:clamp(12px,.95vw,16px);border-radius:12px;background:#dff4ef;padding:8px 11px;font-weight:850;color:#17475a}
+.outcomes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.outcomes .step:last-child:nth-child(odd){grid-column:1/-1}
+.step{display:flex;align-items:flex-start;gap:12px;background:#fff;border:1px solid #c7e2df;border-radius:14px;padding:10px 14px;min-width:0}
+.step>span{width:36px;height:36px;display:grid;place-items:center;flex-shrink:0;border-radius:11px;background:#0a8b85;color:#fff;font-weight:900;direction:ltr}
+.step b{font-size:clamp(15px,1.12vw,21px);color:#0a7776}
+.step p{font-size:clamp(13px,.98vw,18px);margin:2px 0;line-height:1.45}
+.session-banner{display:grid;grid-template-columns:.7fr 1.3fr;gap:12px}
+.session-banner>div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:8px 12px}
+.session-banner span{display:block;font-size:11px;color:#0a7776;font-weight:900;letter-spacing:.08em}
+.session-banner b{display:block;font-size:clamp(18px,1.35vw,25px);margin:2px 0}
+.session-banner small{color:#55727e;font-size:12px}
+.timeline{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.timeline-row{display:grid;grid-template-columns:80px 1fr;gap:6px;align-items:center;background:#fff;border:1px solid #c5dfdc;border-radius:12px;padding:5px 8px}
+.timeline-row span{font-weight:900;color:#0a7776;direction:ltr;text-align:right}
+.timeline-row b{font-size:clamp(14px,1vw,19px)}
+.timeline-row small{grid-column:1/-1;font-size:clamp(10px,.75vw,13px);color:#55727e;line-height:1.3}
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;align-items:stretch}
+.flow-item{background:#fff;border:1px solid #c5dfdc;border-radius:15px;padding:16px 12px;min-width:0;position:relative}
+.flow-item b{display:block;color:#0a7776;font-size:clamp(12px,.95vw,17px);direction:ltr;text-align:right}
+.flow-item span{display:block;font-size:clamp(13px,1vw,18px);margin-top:7px;line-height:1.45}
+.myth-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.myth-card{background:#fff;border:1px solid #c5dfdc;border-radius:16px;padding:14px;display:grid;gap:8px}
+.myth-card div{padding:10px;border-radius:12px;background:#fff4e9}
+.myth-card div+div{background:#e8f8f2}
+.myth-card span{display:block;font-size:11px;font-weight:900;color:#8b5b24;letter-spacing:.08em}
+.myth-card div+div span{color:#087f7a}
+.myth-card b{display:block;font-size:clamp(13px,1vw,18px);line-height:1.45}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.compare-card{background:#fff;border:1px solid #c5dfdc;border-radius:18px;padding:clamp(14px,1.7vw,22px);min-width:0}
+.compare-card.weak{background:#fff4e9;border-color:#e6c5a4}.compare-card.strong{background:#eaf8f2;border-color:#b8decb}
+.compare-card span{font-size:11px;font-weight:900;color:#0a7776;letter-spacing:.08em}
+.compare-card h3{font-size:clamp(17px,1.35vw,25px);margin:7px 0}
+.compare-card p{font-size:clamp(14px,1.08vw,20px);line-height:1.5;margin:0;overflow-wrap:anywhere}
+.prompt-box{background:#fff;border:1px solid #bddbd8;border-radius:18px;padding:clamp(14px,1.6vw,22px);min-width:0}
+.prompt-label{font-size:11px;letter-spacing:.08em;font-weight:900;color:#0a7776;margin-bottom:8px;direction:ltr;text-align:left}
+.prompt-box pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:clamp(14px,1.08vw,20px);line-height:1.5;margin:0 0 12px;color:#16384d}
+.copy-btn,.primary-btn{border:1px solid #0a7776;background:#0a7776;color:#fff;border-radius:10px;padding:8px 14px;font-weight:850;font-size:14px}
+.copy-btn{background:#fff;color:#0a7776}
+.copy-btn:disabled{opacity:.45;cursor:not-allowed}
+.builder{display:grid;gap:12px}
+.builder-intro p{margin:4px 0}
+.builder-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.builder-grid label{display:grid;gap:5px;font-size:13px;font-weight:850;color:#28576a}
+.builder-grid input{width:100%;min-width:0;border:1px solid #bfd9d7;border-radius:10px;padding:10px;background:#fff;color:var(--ink);direction:auto}
+.generated-prompt{background:#f4fafb;border:1px dashed #9fcac5;border-radius:12px;padding:12px;min-height:48px;white-space:pre-wrap;direction:ltr;text-align:left;font:14px/1.5 Arial,sans-serif;overflow-wrap:anywhere}
+.mistake-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.mistake{background:#fff;border:1px solid #c5dfdc;border-radius:16px;padding:14px;min-width:0}
+.mistake>span{font-size:11px;color:#0a7776;font-weight:900}
+.mistake p{font-size:clamp(13px,1vw,18px);line-height:1.45;padding:8px;border-radius:9px;overflow-wrap:anywhere}
+.mistake .bad{background:#fff1e8;color:#7b3e24}.mistake .good{background:#e8f8f2;color:#15584f}
+.checklist-box{background:#fff;border:1px solid #c5dfdc;border-radius:18px;padding:16px}
+.checklist-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.checklist-head b{font-size:clamp(15px,1.2vw,22px);color:#0a7776}
+.checklist-head span{font-weight:900;direction:ltr}
+.checklist-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.check-item{display:flex;align-items:center;gap:9px;border:1px solid #d3e6e3;border-radius:10px;padding:8px;min-width:0}
+.check-item input{width:18px;height:18px;accent-color:#0a8b85;flex-shrink:0}
+.check-item span{color:#0a7776;font-weight:900;font-size:12px}
+.check-item b{font-size:clamp(13px,.95vw,17px);overflow-wrap:anywhere}
+.progress-track{height:8px;background:#e4f0ef;border-radius:99px;overflow:hidden;margin-top:12px}
+.progress-track span{display:block;height:100%;width:0;background:#0a8b85;transition:width .15s}
+.quiz-wrap{display:grid;gap:12px}
+.quiz-q{background:#fff;border:1px solid #c5dfdc;border-radius:16px;padding:14px}
+.quiz-q h3{font-size:clamp(15px,1.1vw,21px);margin:0 0 10px}
+.quiz-q button{display:block;width:100%;text-align:right;border:1px solid #c8dfdc;background:#f9fcfc;border-radius:10px;padding:8px 12px;margin:6px 0;font-size:clamp(13px,.95vw,17px);color:#173d50}
+.quiz-q button.correct{background:#e2f6ec;border-color:#59ad82}.quiz-q button.incorrect{background:#fff0e9;border-color:#dc9270}
+.feedback{font-size:13px;font-weight:800;color:#0a7776;min-height:18px;margin:6px 0 0}
+.mistake .good,.mistake .bad{margin:6px 0}
+.closing-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}
+.closing-grid>div{background:#fff;border:1px solid #c5dfdc;border-radius:14px;padding:14px;text-align:center}
+.closing-grid b{display:block;color:#0a7776;font-size:clamp(12px,.9vw,16px);direction:ltr}
+.closing-grid span{display:block;font-size:clamp(13px,1vw,17px);margin-top:5px}
+.closing-line{text-align:center;font-size:clamp(22px,2vw,36px);line-height:1.35;margin:0;color:#0a5260}
+
+.slide:nth-child(5) .heading{margin-bottom:6px}
+.slide:nth-child(5) .session-banner>div{padding:6px 10px}
+.slide:nth-child(5) .timeline-row{padding:4px 7px}
+.slide:nth-child(11) .info-card{padding:10px 12px}
+.slide:nth-child(11) .info-card p{font-size:14px;line-height:1.3}
+.slide:nth-child(23) .builder{padding:12px;gap:8px}
+.slide:nth-child(23) .builder-grid input{padding:7px 9px}
+.slide:nth-child(43) .quiz-q{padding:10px}
+.slide:nth-child(43) .quiz-q button{padding:6px 10px;margin:4px 0}
+.slide:nth-child(43) .quiz-q h3{font-size:clamp(14px,1vw,18px)}
+.study-extra,.trainer-note{display:none;margin-top:12px;border-radius:12px;padding:12px 15px;font-size:14px;line-height:1.55}
+.study-extra{background:#edf5fb;border-right:5px solid #4b8eb4;color:#244d64}
+.trainer-note{background:#fff4df;border-right:5px solid #d79a3a;color:#624719}
+body.mode-study .study-extra,body.mode-trainer .study-extra{display:block}
+body.mode-trainer .trainer-note{display:block}
+body.mode-study .slide{background:linear-gradient(120deg,#f7fbfd,#fff 60%,#f1f9f8)}
+body.mode-trainer .slide{background:linear-gradient(120deg,#fffaf0,#fff 60%,#f2f9f8)}
+.navbar{flex:0 0 auto;min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:8px clamp(10px,2vw,28px);background:#fff;border-top:1px solid #d5e9e7}
+.navbar button{border:1px solid #c5dfdc;background:#fff;color:#16485b;border-radius:10px;padding:9px 14px;font-weight:850;white-space:nowrap}
+.navbar button.primary{background:#0a7776;color:#fff;border-color:#0a7776}
+.navbar button:disabled{opacity:.35;cursor:not-allowed}
+.nav-center{display:flex;align-items:center;gap:12px;flex:1;max-width:650px;min-width:0}
+.progress{height:8px;background:#e1efed;border-radius:99px;overflow:hidden;flex:1;min-width:40px}
+.progress span{display:block;height:100%;background:#0a8b85;width:0;transition:width .2s}
+.time-ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}.counter{font-weight:900;color:#496d7d;white-space:nowrap;direction:ltr;unicode-bidi:isolate}
+#mode-label{font-size:12px;color:#58727e;white-space:nowrap}
+#overview-panel{display:none;position:fixed;inset:0;z-index:20;background:#082b41b8;padding:clamp(12px,3vw,36px);overflow:auto}
+.overview-inner{max-width:1050px;margin:0 auto;background:#fff;border-radius:20px;padding:18px;box-shadow:0 20px 70px #001b2b55}
+.overview-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.overview-head h2{font-size:22px;margin:0}
+.overview-head input{flex:1;min-width:180px;border:1px solid #c5dfdc;border-radius:10px;padding:9px}
+.overview-head button{border:1px solid #c5dfdc;border-radius:10px;padding:8px 12px;background:#fff;color:#16485b;font-weight:800}
+.overview-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.overview-grid button{display:flex;align-items:flex-start;gap:10px;text-align:right;border:1px solid #d6e8e5;background:#fbfefe;border-radius:10px;padding:9px;color:#163e52;font-size:14px}
+.overview-grid button small{font-weight:900;color:#0a7776;direction:ltr}
+.toast{position:fixed;bottom:72px;left:50%;transform:translateX(-50%);background:#07354a;color:#fff;border-radius:99px;padding:8px 14px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .15s;z-index:30}
+.toast.show{opacity:1}
+@media(max-width:1050px){
+ .hero-layout{grid-template-columns:1fr}.hero-layout>div:first-child{order:2}.hero-layout>div:last-child{order:1}.hero-visual{padding:8px}.hero-visual svg{max-height:18vh}
+ .body{justify-content:flex-start}
+ .slide{padding:18px 22px 24px}
+ .timeline-row{grid-template-columns:80px 1fr}.timeline-row small{grid-column:1/-1}
+ .flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:1300px) and (min-width:761px){.checklist-grid{grid-template-columns:repeat(5,minmax(0,1fr))}.check-item{padding:6px;gap:5px}.check-item b{font-size:13px}}
+@media(max-width:760px){
+ .topbar{flex-wrap:wrap;justify-content:space-between;gap:6px;padding:6px 8px}
+ .brand{width:auto;justify-content:flex-start;font-size:11px}
+ .modebar{order:3;flex-basis:100%;justify-content:center}
+ .top-actions{justify-content:flex-end}
+ .hero-visual{display:none}
+ .topbar .modebar button,.topbar .top-actions button{padding:6px 9px;font-size:12px}
+ .grid-2,.grid-3,.compare,.session-banner,.myth-grid,.mistake-grid{grid-template-columns:1fr}.hero-visual{display:none}
+ .closing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .slide{padding:14px 13px 20px}
+ .heading h1{font-size:clamp(25px,6vw,39px)}
+ .subtitle{font-size:15px}
+ .navbar{min-height:0;flex-wrap:nowrap;padding:6px 8px;gap:6px}
+ .nav-center{order:0;flex:1;max-width:none;gap:6px}
+ #mode-label{display:none}
+ .navbar button{padding:6px 8px;font-size:12px}
+ .body p,.body li{font-size:16px}.outcomes{grid-template-columns:1fr}.outcomes .step:last-child:nth-child(odd){grid-column:auto}
+ .flow{grid-template-columns:1fr}
+ .flow-item{padding:12px}
+ .builder-grid{grid-template-columns:1fr}
+ .checklist-grid{grid-template-columns:1fr}
+ .overview-grid{grid-template-columns:1fr}
+ .overview-head{align-items:stretch}
+ .overview-head input{flex-basis:100%}
+ .session-banner{grid-template-columns:1fr}
+ .timeline{grid-template-columns:1fr}.timeline-row{grid-template-columns:75px 1fr}.checklist-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-height:700px) and (min-width:761px){
+ .slide{padding-top:12px;padding-bottom:14px}
+ .heading{margin-bottom:8px}
+ .body{justify-content:flex-start}
+ .panel{padding:13px}
+ .hero-visual svg{max-height:28vh}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+@media print{
+ .topbar,.navbar,#overview-panel,.toast{display:none!important}
+ #app{height:auto;overflow:visible}
+ #deck{overflow:visible;height:auto}
+ .slide{display:block!important;position:relative;inset:auto;overflow:visible;min-height:95vh;page-break-after:always}
+ .study-extra,.trainer-note{display:block}
+}
+</style>
+<style>
+/* Revision: larger projector typography and running case outputs */
+@media(min-width:1051px){.case-facts{grid-template-columns:repeat(3,minmax(0,1fr))!important}.case-facts .info-card{min-height:0!important;padding:12px 15px!important}.case-facts .info-card small{font-size:15px!important;line-height:1.4!important}.case-facts .info-card p{margin:3px 0!important}}
+.heading h1{font-size:clamp(34px,3.5vw,62px)!important;line-height:1.18!important}
+.subtitle{font-size:clamp(18px,1.45vw,24px)!important;line-height:1.55!important}
+.body p,.body li,.body td,.body th,.body small{font-size:clamp(18px,1.35vw,23px)!important;line-height:1.58!important}
+.body h2,.body h3{font-size:clamp(22px,1.8vw,31px)!important;line-height:1.3!important}
+.info-card{padding:clamp(16px,1.5vw,24px)!important}
+.info-card p{font-size:clamp(18px,1.35vw,23px)!important;line-height:1.55!important}
+.info-card b{font-size:clamp(19px,1.45vw,25px)!important}
+.info-card small{font-size:clamp(16px,1.1vw,19px)!important;line-height:1.5!important;display:block}
+.callout{font-size:clamp(18px,1.3vw,22px)!important;line-height:1.6!important;padding:15px 20px!important}
+.study-extra,.trainer-note{font-size:clamp(16px,1.1vw,19px)!important;line-height:1.6!important}
+.slide-topline{font-size:clamp(13px,1vw,17px)!important}
+.cv-result-layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(260px,.75fr);gap:18px;align-items:stretch;width:100%}
+.cv-paper{background:#fff;border:1px solid #c9dddf;border-radius:18px;padding:clamp(20px,2.1vw,34px);box-shadow:0 8px 26px rgba(5,58,76,.08);min-width:0;color:#19374a}
+.cv-paper-kicker{font-size:14px!important;font-weight:900;letter-spacing:.08em;color:#087f7a;border-bottom:2px solid #d9ece9;padding-bottom:10px;margin-bottom:16px;direction:ltr;text-align:left}
+.cv-name{font-size:clamp(27px,2.5vw,38px)!important;line-height:1.2!important;font-weight:950;color:#123b55;margin-bottom:8px;direction:ltr;text-align:left}
+.cv-contact{font-size:clamp(15px,1.15vw,19px)!important;line-height:1.5!important;color:#506b7a;margin:3px 0 8px;direction:ltr;text-align:left;overflow-wrap:anywhere}
+.cv-section-heading{font-size:clamp(17px,1.35vw,22px)!important;line-height:1.3!important;font-weight:950;color:#087f7a;border-bottom:1px solid #b9dcd7;padding:12px 0 5px;margin:10px 0 8px;letter-spacing:.035em;direction:ltr;text-align:left}
+.cv-item-title{font-size:clamp(19px,1.45vw,24px)!important;font-weight:900;line-height:1.4!important;direction:ltr;text-align:left;color:#19374a;margin-top:5px}
+.cv-item-meta{font-size:clamp(16px,1.15vw,19px)!important;line-height:1.5!important;color:#5a7280;direction:ltr;text-align:left;margin:4px 0 8px}
+.cv-output-text{font-size:clamp(18px,1.35vw,23px)!important;line-height:1.6!important;direction:ltr;text-align:left;color:#213f52;margin:7px 0}
+.cv-output-list{direction:ltr;text-align:left;padding-left:24px;margin:8px 0}
+.cv-output-list li{font-size:clamp(18px,1.3vw,22px)!important;line-height:1.55!important;margin:5px 0}
+.cv-explain{background:#eaf6f5;border:1px solid #c4e3de;border-radius:18px;padding:clamp(18px,1.8vw,28px);min-width:0;display:flex;flex-direction:column;gap:12px}
+.cv-explain-label{font-size:clamp(20px,1.55vw,26px)!important;font-weight:950;color:#0a6d70}
+.cv-explain p,.cv-explain li{font-size:clamp(18px,1.25vw,21px)!important;line-height:1.6!important}
+.cv-proof{margin-top:auto;border-top:1px solid #c4dfdb;padding-top:12px}
+.cv-proof b{font-size:16px!important;color:#087f7a;letter-spacing:.06em}
+.cv-empty-state{display:flex;flex-direction:column;gap:9px;padding:18px;border:1px dashed #9bbfc0;border-radius:12px;background:#f7fbfb;direction:ltr;text-align:left}
+.cv-empty-state strong{font-size:clamp(18px,1.4vw,23px)!important}
+.cv-empty-state span{font-size:clamp(16px,1.15vw,19px)!important;color:#5c7480}
+.cv-full-paper{max-width:920px;margin-inline:auto}
+.cv-full-paper .cv-section-heading{margin-top:8px;padding-top:8px}
+.cv-cert-note{font-size:15px!important;color:#607886;border-top:1px dashed #c5d7d8;margin-top:12px;padding-top:8px;direction:ltr;text-align:left}
+.cv-ar-list{padding-right:22px;margin:0}
+.case-intro-banner{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:12px 16px;background:#e7f6f3;border:1px solid #b9ddd7;border-radius:14px;color:#0a6870}
+.case-intro-banner strong{font-size:clamp(17px,1.3vw,22px)!important;direction:ltr}
+.case-intro-banner span{font-size:clamp(16px,1.15vw,19px)!important}
+.case-rule{margin-top:4px;padding:8px 14px!important;font-size:16px!important;line-height:1.35!important}
+.case-facts .info-card{min-height:128px}
+.sample-weak,.sample-strong{font-size:clamp(18px,1.35vw,22px)!important;line-height:1.6!important}
+.tag-bad,.tag-good{display:inline-block;font-size:14px!important;font-weight:900;padding:5px 9px;border-radius:8px;margin-bottom:8px}
+.tag-bad{background:#fff0e9;color:#a04a2d}.tag-good{background:#e6f6ed;color:#176b49}
+.cv-final-paper{max-width:920px}
+@media(max-width:900px){.cv-result-layout{grid-template-columns:1fr}.cv-explain{gap:8px}.cv-paper{padding:18px}}
+@media(max-width:760px){
+ .heading h1{font-size:clamp(29px,7vw,38px)!important}
+ .subtitle{font-size:18px!important}
+ .body p,.body li,.body td,.body th{font-size:17px!important;line-height:1.55!important}
+ .info-card p{font-size:17px!important}.info-card b{font-size:18px!important}.info-card small{font-size:15px!important}
+ .callout{font-size:17px!important;padding:12px 14px!important}
+ .cv-name{font-size:28px!important}.cv-section-heading{font-size:17px!important}.cv-output-text,.cv-output-list li{font-size:17px!important}
+ .cv-item-title{font-size:18px!important}.cv-contact,.cv-item-meta{font-size:15px!important}
+ .case-facts{grid-template-columns:1fr!important}
+}
+</style></head>
+<body data-mode="presentation">
+<div id="app">
+<header class="topbar">
+<div class="brand"><span class="brand-mark">GH</span><span>GET HIRED · MODULE 05</span></div>
+<nav aria-label="Presentation modes" class="modebar">
+<button class="active" data-mode="presentation">العرض</button>
+<button data-mode="study">مذاكرة الطالب</button>
+<button data-mode="trainer">المدرّب</button>
+</nav>
+<div class="top-actions">
+<button id="overview">الفهرس</button>
+<button id="fullscreen">ملء الشاشة</button>
+</div>
+</header>
+<main id="deck">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section aria-hidden="true" class="slide" data-section="OPENING · MY BRAND" data-title="CV Building with AI Tools">
+<header class="slide-topline">
+<div><span class="slide-number">01</span><span class="section-label">GET HIRED · MODULE 05 · OPENING · MY BRAND</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">CV Building with AI Tools</h1>
+<p class="subtitle" dir="auto">من المعلومات الحقيقية إلى سيرة ذاتية قابلة للقراءة والمراجعة</p>
+</div>
+<main class="body" dir="rtl">
+<div class="hero-layout">
+<div class="hero-visual">
+<svg aria-label="CV workflow diagram" role="img" viewbox="0 0 520 300">
+<rect fill="#e8f4fb" height="252" rx="24" width="460" x="30" y="24"></rect>
+<rect fill="#fff" height="210" rx="16" stroke="#c6dfdf" stroke-width="3" width="190" x="165" y="42"></rect>
+<path d="M195 83H325 M195 108H325 M195 133H325 M195 178H325 M195 203H295" stroke="#c7d9e5" stroke-linecap="round" stroke-width="8"></path>
+<path d="M195 154H260" stroke="#0a8b85" stroke-linecap="round" stroke-width="10"></path>
+<circle cx="355" cy="216" fill="#0a8b85" r="42" stroke="#fff" stroke-width="8"></circle>
+<path d="M336 216l13 13 26-30" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"></path>
+<text fill="#0a7776" font-size="15" font-weight="700" text-anchor="middle" x="260" y="25">FACTS → DRAFT → REVIEW → FORMAT</text>
+</svg>
+<div class="visual-caption">ChatGPT · Grammarly · Canva · Human Review</div>
+</div>
+<div>
+<div class="eyebrow">GET HIRED · MODULE 05 · MY BRAND</div>
+<h2 class="hero-title">ابنِ CV واضحًا، <em>ملائمًا وصادقًا</em></h2>
+<p class="lead">استخدم أدوات AI لصياغة المسودة، راجع اللغة، ثم نسّق السيرة الذاتية دون أن تضحي بوضوحها أو حقيقة محتواها.</p>
+<div class="tag-row"><span>ATS</span><span>ChatGPT</span><span>Grammarly</span><span>Canva</span><span>CV Sprint</span></div>
+</div>
+</div>
+</main>
+<div class="study-extra"><b>للمذاكرة:</b> هذه الجلسة جزء من MY BRAND. المخرج المباشر هو CV كامل بمساعدة ChatGPT وGrammarly وCanva، مع احتفاظ الطالب بمسؤولية كل معلومة.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> ابدأ بسؤال: هل يمكن أن تكون السيرة الذاتية جميلة لغويًا لكنها غير دقيقة؟ وضّح أن الجلسة ليست وعدًا باجتياز ATS.</div>
+</section><section aria-hidden="true" class="slide" data-section="CASE FILE · MARYAM" data-title="الحالة التي سنبني عليها">
+<header class="slide-topline">
+<div><span class="slide-number">02</span><span class="section-label">GET HIRED · MODULE 05 · CASE STUDY · MARYAM</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">الحالة التي سنبني عليها</h1>
+<p class="subtitle" dir="auto">سنستخدم ملفًا افتراضيًا واحدًا ونبني سيرته خطوة بخطوة</p>
+</div>
+<main class="body" dir="rtl"><div class="case-intro-banner"><strong>CASE FILE · MARYAM AHMED</strong><span>حالة افتراضية للتطبيق — ليست بيانات متدرب حقيقي</span></div><div class="grid grid-2 case-facts">
+<div class="info-card"><b>PROFILE · الملف المهني</b><p>Maryam Ahmed — خريجة تجارة حديثة</p><small>لا توجد خبرة عمل رسمية.</small></div>
+<div class="info-card"><b>TARGET · الوظيفة المستهدفة</b><p>Entry-level Operations Role</p><small>وظيفة مبتدئة في مجال العمليات.</small></div>
+<div class="info-card"><b>EDUCATION · التعليم</b><p>Commerce Graduate</p><small>المؤسسة وسنة التخرج غير متاحتين؛ تُستكملان من بيانات صحيحة.</small></div>
+<div class="info-card"><b>PROJECT · المشروع الجامعي</b><p>Sales Records Organisation</p><small>نظّمت سجل مبيعات بـExcel وأعدّت جدولًا ملخصًا.</small></div>
+<div class="info-card"><b>SKILLS · المهارات المثبتة</b><p>Basic Microsoft Excel · Data Organisation</p><small>مرتبطة بمهمة فعلية في المشروع.</small></div>
+<div class="info-card"><b>LANGUAGES · اللغات</b><p>Arabic — Native · English — A2</p><small>نحافظ على المستوى كما هو.</small></div>
+</div><div class="callout case-rule"><strong>قاعدة العمل:</strong> كل مخرج سيظهر بعد تطبيقه. المجهول يُترك فارغًا؛ لا نخترع بيانات.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المعلومات الواردة في المثال افتراضية ومحدودة عمدًا. الهدف هو تعليم الطالب كيف يبني CV من أدلة حقيقية.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> اسأل المتدربين: ما المعلومات التي نعرفها؟ وما المعلومات التي لا يجوز لنا تخمينها؟</div>
+</section><section aria-hidden="true" class="slide" data-section="ORIENTATION · MY BRAND" data-title="حدود جلسة AI Tools في اليوم الخامس">
+<header class="slide-topline">
+<div><span class="slide-number">03</span><span class="section-label">GET HIRED · MODULE 05 · ORIENTATION · MY BRAND</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">حدود جلسة AI Tools في اليوم الخامس</h1>
+<p class="subtitle" dir="auto">نحافظ على مخرجات المسارات منفصلة</p>
+</div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="info-card"><span class='\"card-tag\"'>AI TOOLS SESSION</span><b>AI TOOLS SESSION</b><p>CV Building with AI Tools — ChatGPT, Grammarly &amp; Canva</p></div><div class="info-card"><span class='\"card-tag\"'>مخرج يومي لمسار آخر</span><b>COMMUNICATION &amp; SOFT SKILLS</b><p>Personal Brand Statement — 30-second pitch</p></div><div class="info-card"><span class='\"card-tag\"'>مخرج يومي لمسار آخر</span><b>BUSINESS ENGLISH</b><p>Cover Letter — Boss Battle 1 product</p></div><div class="info-card"><span class='\"card-tag\"'>مجموعة بطاقات داعمة</span><b>AI SUPPORT ASSET</b><p>CV writing prompt card set — 5 prompts</p></div></div><div class="callout warning">لن نخلط بين CV الخاص بجلسة AI Tools وبين Personal Brand Statement وCover Letter؛ لكل مخرج مساره.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المصدر يحدد جلسة AI Tools لبناء CV باستخدام ChatGPT وGrammarly وCanva. ويعرض مخرجات اليوم كاملة، لذلك يجب تصنيفها حسب المسار.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> لا تنفذ Cover Letter Boss Battle داخل هذه الجلسة. أشر إليه بوصفه مخرجًا لمسار Business English فقط.</div>
+</section><section aria-hidden="true" class="slide" data-section="ORIENTATION · DELIVERABLES" data-title="ماذا يجب أن يكون في يد المتدرب؟">
+<header class="slide-topline">
+<div><span class="slide-number">04</span><span class="section-label">GET HIRED · MODULE 05 · ORIENTATION · DELIVERABLES</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">ماذا يجب أن يكون في يد المتدرب؟</h1>
+<p class="subtitle" dir="auto">المخرجات الرسمية كما يحددها المصدر، مع فصل المسارات</p>
+</div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="info-card"><span class='\"card-tag\"'>Complete · Grammarly-checked · Canva-formatted</span><b>PRIMARY OUTPUT</b><p>ATS-compatible CV</p></div><div class="info-card"><span class='\"card-tag\"'>بطاقات Prompt تساعد على بناء أقسام السيرة</span><b>SUPPORT ASSET</b><p>Five CV AI Prompts</p></div><div class="info-card"><span class='\"card-tag\"'>30-second pitch — Communication &amp; Soft Skills</span><b>WHOLE-DAY OUTPUT</b><p>Personal Brand Statement</p></div><div class="info-card"><span class='\"card-tag\"'>Boss Battle 1 — Business English</span><b>WHOLE-DAY OUTPUT</b><p>Cover Letter</p></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المخرج الأساسي لجلسة AI Tools هو السيرة الذاتية المتوافقة مع ATS، أما Personal Brand Statement وCover Letter فمخرجات يومية من مسارات أخرى.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> في التقييم، لا تجعل الطالب يعتقد أن إنهاء Cover Letter جزء من CV Sprint.</div>
+</section><section aria-hidden="true" class="slide" data-section="LEARNING OUTCOMES · MY BRAND" data-title="أهداف التعلم">
+<header class="slide-topline">
+<div><span class="slide-number">05</span><span class="section-label">GET HIRED · MODULE 05 · LEARNING OUTCOMES · MY BRAND</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">أهداف التعلم</h1>
+<p class="subtitle" dir="auto">ما الذي يجب أن يستطيع المتدرب فعله في نهاية الجلسة؟</p>
+</div>
+<main class="body" dir="rtl"><div class="outcomes"><div class="step"><span>01</span><div><b>يفسر ATS</b><p>يشرح بصورة مبسطة كيف يجمع النظام السير الذاتية ويستخرج المعلومات وينظمها للبحث.</p></div></div><div class="step"><span>02</span><div><b>يبني CV منظمًا</b><p>يستخدم الأقسام السبعة المذكورة في المصدر دون اختلاق بيانات.</p></div></div><div class="step"><span>03</span><div><b>يوجه ChatGPT</b><p>يستخدم Prompt المصدر لكتابة Summary من ثلاث جمل، ويستفيد من قوالب الأقسام الأخرى.</p></div></div><div class="step"><span>04</span><div><b>يراجع اللغة</b><p>يفحص الأخطاء والرسمية والوضوح في Grammarly أو قائمة مراجعة بديلة.</p></div></div><div class="step"><span>05</span><div><b>ينسق ويفحص</b><p>يستخدم Canva مع مراعاة بساطة التصميم وقابلية قراءة النص.</p></div></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذه أهداف مشتقة من موضوعات الجلسة، وليست صياغة حرفية من ملف المصدر.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> اربط كل هدف بدليل يمكن ملاحظته في CV النهائي أو أثناء نشاط CV Sprint.</div>
+</section><section aria-hidden="true" class="slide" data-section="ATS · FOUNDATIONS" data-title="ما هو نظام تتبع المتقدمين (ATS)؟">
+<header class="slide-topline">
+<div><span class="slide-number">06</span><span class="section-label">GET HIRED · MODULE 05 · ATS · FOUNDATIONS</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">ما هو نظام تتبع المتقدمين (ATS)؟</h1>
+<p class="subtitle" dir="auto">Applicant Tracking System — نظام لإدارة طلبات التوظيف</p>
+</div>
+<main class="body" dir="rtl"><div class="grid grid-3"><div class="info-card"><span class='\"card-tag\"'>الشخص الذي يرسل طلب التوظيف والسيرة الذاتية.</span><b>A — Applicant</b><p>المتقدم</p></div><div class="info-card"><span class='\"card-tag\"'>تنظيم الطلبات ومتابعة مراحلها.</span><b>T — Tracking</b><p>التتبع</p></div><div class="info-card"><span class='\"card-tag\"'>برنامج يساعد جهات التوظيف على إدارة طلبات المرشحين.</span><b>S — System</b><p>النظام</p></div></div><div class="callout">ATS = Applicant Tracking System. ليس حكمًا موحدًا يقرر أهلية كل مرشح بالطريقة نفسها.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> اشرح المفهوم العام دون تعميم أن جميع أنظمة ATS تعمل بخوارزمية واحدة أو تستخدم درجة مطابقة واحدة.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> تجنب وصف ATS بأنه روبوت يرفض كل CV غير مصمم بطريقة معينة.</div>
+</section><section aria-hidden="true" class="slide" data-section="ATS · PROCESS" data-title="كيف تتعامل بعض أنظمة ATS مع السيرة؟">
+<header class="slide-topline">
+<div><span class="slide-number">07</span><span class="section-label">GET HIRED · MODULE 05 · ATS · PROCESS</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">كيف تتعامل بعض أنظمة ATS مع السيرة؟</h1>
+<p class="subtitle" dir="auto">من الملف المرفوع إلى معلومات قابلة للبحث</p>
+</div>
+<main class="body" dir="rtl"><div class="flow"><div class="flow-item"><b>01 · SUBMIT</b><span>رفع السيرة الذاتية</span></div><div class="flow-item"><b>02 · PARSE</b><span>استخراج النص والحقول</span></div><div class="flow-item"><b>03 · ORGANISE</b><span>تنظيم بيانات المرشح</span></div><div class="flow-item"><b>04 · SEARCH</b><span>البحث والمراجعة وفق احتياجات جهة التوظيف</span></div></div><div class="callout">قد تختلف قدرات الأنظمة وإعداداتها. الرسم توضيحي لمسار عام، وليس وصفًا تقنيًا موحدًا لكل منتج.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> استخدم هذا الرسم لتفسير لماذا تهم عناوين الأقسام الواضحة والنص القابل للاستخراج.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> لا تقل إن كل ATS يرفض الأعمدة أو الأيقونات تلقائيًا؛ اشرحها باعتبارها مخاطر محتملة على الاستخراج.</div>
+</section><section aria-hidden="true" class="slide" data-section="ATS · MYTHS &amp; REALITY" data-title="خرافات ATS والواقع العملي">
+<header class="slide-topline">
+<div><span class="slide-number">08</span><span class="section-label">GET HIRED · MODULE 05 · ATS · MYTHS &amp; REALITY</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">خرافات ATS والواقع العملي</h1>
+<p class="subtitle" dir="auto">لا توجد وصفة عامة تضمن القبول</p>
+</div>
+<main class="body" dir="rtl"><div class="myth-grid"><div class="myth-card"><div><span>MYTH</span><b>قالب واحد يضمن اجتياز كل ATS.</b></div><div><span>REALITY</span><b>تختلف الأنظمة وتعليمات جهة التوظيف هي المرجع.</b></div></div><div class="myth-card"><div><span>MYTH</span><b>أضف أكبر عدد من الكلمات المفتاحية.</b></div><div><span>REALITY</span><b>استخدم كلمات الإعلان عندما تدعمها خبرتك.</b></div></div><div class="myth-card"><div><span>MYTH</span><b>التصميم الجميل أهم من المحتوى.</b></div><div><span>REALITY</span><b>المحتوى الدقيق والهيكل الواضح يسبقان الزخرفة.</b></div></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> لا تعد الطالب بأن قالبًا بعينه أو اختبار نسخ النص يضمن اجتياز نظام التوظيف.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> اطلب من الطلاب تفسير الفرق بين تحسين قابلية القراءة وبين ضمان نتيجة التوظيف.</div>
+</section><section aria-hidden="true" class="slide" data-section="ATS · KEYWORD ALIGNMENT" data-title="من متطلبات الوظيفة إلى الدليل ثم الكلمات المفتاحية">
+<header class="slide-topline">
+<div><span class="slide-number">09</span><span class="section-label">GET HIRED · MODULE 05 · ATS · KEYWORD ALIGNMENT</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">من متطلبات الوظيفة إلى الدليل ثم الكلمات المفتاحية</h1>
+<p class="subtitle" dir="auto">اربط لغة الإعلان بما تستطيع إثباته</p>
+</div>
+<main class="body" dir="rtl"><div class="flow"><div class="flow-item"><b>JOB REQUIREMENT</b><span>Microsoft Excel</span></div><div class="flow-item"><b>YOUR EVIDENCE</b><span>استخدمت Excel لتنظيم بيانات مشروع جامعي</span></div><div class="flow-item"><b>CV BULLET</b><span>Organised project sales records in Excel and prepared a summary table.</span></div></div><div class="callout">الكلمة المفتاحية لا تُضاف لمجرد ورودها في الإعلان؛ يجب أن يكون لها دليل حقيقي في خبرتك.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذا إطار تدريبي لتطبيق فكرة الكلمات المفتاحية بصورة صادقة؛ لا يضيف المصدر معادلة حسابية للمطابقة.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> استخدم إعلان وظيفة حقيقيًا أو مثالًا افتراضيًا واضح التسمية. لا تشجع على حشو الكلمات.</div>
+</section><section aria-hidden="true" class="slide" data-section="CV STRUCTURE · SOURCE" data-title="الأقسام السبعة للسيرة الذاتية">
+<header class="slide-topline">
+<div><span class="slide-number">10</span><span class="section-label">GET HIRED · MODULE 05 · CV STRUCTURE · SOURCE</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">الأقسام السبعة للسيرة الذاتية</h1>
+<p class="subtitle" dir="auto">هذه هي الحقول التي يسميها المصدر صراحة</p>
+</div>
+<main class="body" dir="rtl"><div class="grid grid-3"><div class="info-card"><span class='\"card-tag\"'>01 · HEADER</span><b>البيانات الأساسية</b><p>الاسم ووسائل التواصل المهنية.</p></div><div class="info-card"><span class='\"card-tag\"'>02 · SUMMARY</span><b>الملخص المهني</b><p>ثلاث جمل موجزة وموجهة.</p></div><div class="info-card"><span class='\"card-tag\"'>03 · EDUCATION</span><b>التعليم</b><p>الدرجة والمؤسسة والتواريخ.</p></div><div class="info-card"><span class='\"card-tag\"'>04 · EXPERIENCE</span><b>الخبرة</b><p>عمل أو تدريب أو مشروعات مناسبة.</p></div><div class="info-card"><span class='\"card-tag\"'>05 · SKILLS</span><b>المهارات</b><p>مهارات يمكن إثباتها.</p></div><div class="info-card"><span class='\"card-tag\"'>06 · LANGUAGES</span><b>اللغات</b><p>مستوى صادق وواضح.</p></div><div class="info-card"><span class='\"card-tag\"'>07 · CERTIFICATIONS</span><b>الشهادات</b><p>شهادات مكتملة فقط.</p></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المصدر يعدد سبعة حقول: Header, Summary, Education, Experience, Skills, Languages, Certifications.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> لا تحذف الأقسام بسبب قلة خبرة الطالب؛ يمكن استخدام مشروعات ومقررات وشهادات حقيقية بحسب الحالة.</div>
+</section><section aria-hidden="true" class="slide" data-section="CV STRUCTURE · HEADER" data-title="القسم الأول: البيانات الأساسية (Header)">
+<header class="slide-topline">
+<div><span class="slide-number">11</span><span class="section-label">GET HIRED · MODULE 05 · CV STRUCTURE · HEADER</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">القسم الأول: البيانات الأساسية (Header)</h1>
+<p class="subtitle" dir="auto">اكتب المعلومات يدويًا وتحقق منها</p>
+</div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="info-card"><span class='\"card-tag\"'>NAME</span><b>الاسم المهني</b><p>اكتب الاسم الذي تستخدمه مهنيًا.</p></div><div class="info-card"><span class='\"card-tag\"'>CONTACT</span><b>البريد والهاتف</b><p>وسائل اتصال صحيحة ويمكن الوصول إليها.</p></div><div class="info-card"><span class='\"card-tag\"'>LOCATION</span><b>الموقع</b><p>المدينة/الدولة عند الحاجة.</p></div><div class="info-card"><span class='\"card-tag\"'>LINKS</span><b>روابط مهنية</b><p>LinkedIn أو Portfolio إذا كان الرابط صالحًا.</p></div></div><div class="callout">لا حاجة إلى إرسال رقم قومي أو بيانات هوية أو عنوان سكن تفصيلي إلى ChatGPT.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> البيانات الشخصية الأساسية غالبًا لا تحتاج إلى توليد آلي. راجع الروابط ووسائل الاتصال بنفسك.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> استخدم بيانات تجريبية عند العرض. لا تعرض أرقام هواتف أو عناوين حقيقية للمتدربين.</div>
+</section><section aria-hidden="true" class="slide" data-section="CASE APPLICATION" data-title="مخرج التطبيق 01: البيانات الأساسية">
+<header class="slide-topline"><div><span class="slide-number">12</span><span class="section-label">GET HIRED · MODULE 05 · CASE APPLICATION</span></div><span class="module-pill">CV OUTPUT</span></header>
+<div class="heading"><h1 dir="auto">مخرج التطبيق 01: البيانات الأساسية</h1><p class="subtitle" dir="auto">Header — هذا هو الشكل الفعلي لقسم البيانات الأساسية داخل السيرة الذاتية.</p></div>
+<main class="body" dir="rtl"><div class="cv-result-layout">
+<div class="cv-paper"><div class="cv-paper-kicker">SAMPLE CV OUTPUT · 01 · HEADER</div><div class="cv-name" dir="ltr">Maryam Ahmed</div><div class="cv-contact" dir="ltr">[Professional Email]  |  [Phone Number]  |  [City, Country]</div><div class="cv-contact" dir="ltr">[LinkedIn URL — optional, if available]</div></div>
+<aside class="cv-explain"><div class="cv-explain-label">ماذا يرى مسؤول التوظيف؟</div><p>الاسم في الأعلى، ثم وسائل الاتصال المهنية. نترك البريد والهاتف والمدينة كحقول واضحة حتى تقدم مريم بياناتها الحقيقية.</p><div class="cv-proof"><b>FACT CHECK</b><p>الاسم افتراضي. البريد والهاتف والمدينة والرابط غير متاحة في الحالة؛ لذلك لم نخترعها.</p></div></aside>
+</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذا مثال تدريبي مبني على الحقائق المحددة في ملف مريم. الحقول الموضوعة بين أقواس مربعة يجب استبدالها بمعلومات حقيقية قبل استخدام أي CV فعلي.</div><div class="trainer-note"><b>ملاحظة المدرب:</b> اطلب من المتدربين مطابقة كل سطر في نموذج المخرجات مع بطاقة الحالة. اسأل: ما الدليل؟ وما المعلومة التي ما زالت ناقصة؟</div></section><section aria-hidden="true" class="slide" data-section="CV STRUCTURE · SUMMARY" data-title="القسم الثاني: الملخص المهني (Professional Summary)">
+<header class="slide-topline">
+<div><span class="slide-number">13</span><span class="section-label">GET HIRED · MODULE 05 · CV STRUCTURE · SUMMARY</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">القسم الثاني: الملخص المهني (Professional Summary)</h1>
+<p class="subtitle" dir="auto">ملخص قصير ومحدد يوجه القارئ</p>
+</div>
+<main class="body" dir="rtl"><div class="grid grid-3"><div class="info-card"><b>WHO</b><p>التخصص أو الدرجة والحالة المهنية الحالية.</p></div><div class="info-card"><b>WHAT</b><p>مهارات حقيقية مرتبطة بدليل أو مشروع.</p></div><div class="info-card"><b>WHERE</b><p>القطاع أو الدور الذي تستهدفه.</p></div></div><div class="callout">الملخص ليس قائمة صفات عامة؛ يجب أن يجيب عن: من أنت؟ ماذا تستطيع؟ وما المجال الذي تستهدفه؟</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المصدر يطلب CV summary من ثلاث جمل لخريج جديد مع تخصص ومهارات وقطاع مستهدف.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> اطلب من الطالب أن يحدد الحقائق الثلاث قبل كتابة أي جملة.</div>
+</section><section aria-hidden="true" class="slide" data-section="CHATGPT · SOURCE PROMPT" data-title="Prompt المصدر لكتابة الملخص المهني">
+<header class="slide-topline">
+<div><span class="slide-number">14</span><span class="section-label">GET HIRED · MODULE 05 · CHATGPT · SOURCE PROMPT</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">Prompt المصدر لكتابة الملخص المهني</h1>
+<p class="subtitle" dir="auto">حافظ على النص الأصلي وشرط ثلاث جمل</p>
+</div>
+<main class="body" dir="rtl"><div class="prompt-box"><div class="prompt-label">SOURCE PROMPT · VERBATIM</div><pre dir="ltr">Write a 3-sentence CV summary for a fresh graduate in [field] with skills in [X, Y, Z] targeting [sector].</pre><button class="copy-btn" data-copy="Write a 3-sentence CV summary for a fresh graduate in [field] with skills in [X, Y, Z] targeting [sector].">نسخ Prompt</button></div><div class="grid grid-3"><div class="info-card"><span class='\"card-tag\"'>اكتب التخصص أو الدرجة كما هي.</span><b>[field]</b><p>التخصص</p></div><div class="info-card"><span class='\"card-tag\"'>اختر مهارات تستطيع إثباتها.</span><b>[X, Y, Z]</b><p>المهارات</p></div><div class="info-card"><span class='\"card-tag\"'>حدد مجالًا مستهدفًا بصورة واقعية.</span><b>[sector]</b><p>القطاع</p></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذا النص محفوظ حرفيًا كما ورد في المصدر. لا تحذف شرط 3-sentence أو الحقول بين الأقواس.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> اطلب من طالب ملء الحقول شفهيًا قبل نسخ الأمر. لا تقدم Prompt بديلًا بوصفه النص الرسمي.</div>
+</section><section aria-hidden="true" class="slide" data-section="CHATGPT · PROMPT ANATOMY" data-title="كيف نفكك Prompt المصدر؟">
+<header class="slide-topline">
+<div><span class="slide-number">15</span><span class="section-label">GET HIRED · MODULE 05 · CHATGPT · PROMPT ANATOMY</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">كيف نفكك Prompt المصدر؟</h1>
+<p class="subtitle" dir="auto">افهم وظيفة كل حقل قبل كتابة البيانات</p>
+</div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="info-card"><span class='\"card-tag\"'>TASK</span><b>المهمة</b><p>اكتب CV Summary.</p></div><div class="info-card"><span class='\"card-tag\"'>CONTEXT</span><b>السياق</b><p>خريج جديد في تخصص محدد.</p></div><div class="info-card"><span class='\"card-tag\"'>EVIDENCE</span><b>الدليل</b><p>مهارات حقيقية قابلة للإثبات.</p></div><div class="info-card"><span class='\"card-tag\"'>TARGET</span><b>الهدف</b><p>قطاع أو دور محدد.</p></div></div><div class="callout">هذا تفكيك تعليمي للـPrompt لتسهيل فهمه، وليس صيغة Prompt إضافية حرفية من المصدر.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> توضيح عناصر المهمة والسياق والمهارات والقطاع هو شرح تعليمي للنص الأصلي.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> لا تخلط بين التحليل التعليمي للنص وبين القول إن المصدر قدم هذه الصيغة كقاعدة رسمية.</div>
+</section><section class="slide" data-title="نملأ Prompt المصدر بحالة مريم" data-section="CASE APPLICATION · PROMPT" aria-hidden="true">
+<header class="slide-topline"><div><span class="slide-number">16</span><span class="section-label">GET HIRED · MODULE 05 · CASE APPLICATION</span></div><span class="module-pill">PROMPT IN ACTION</span></header>
+<div class="heading"><h1 dir="auto">نملأ Prompt المصدر بحالة مريم</h1><p class="subtitle" dir="auto">نستبدل الحقول بين الأقواس بمعلومات مثبتة من ملف الحالة.</p></div>
+<main class="body" dir="rtl">
+<div class="cv-paper prompt-fill-paper"><div class="cv-paper-kicker">SOURCE PROMPT · FILLED EXAMPLE</div><p class="cv-output-text" dir="ltr">Write a 3-sentence CV summary for a fresh graduate in <strong>Commerce</strong> with skills in <strong>Basic Microsoft Excel, Data Organisation, and Summary Table Preparation</strong> targeting <strong>entry-level operations roles</strong>.</p></div>
+<div class="grid grid-3 prompt-mapping"><div class="info-card"><b>[field]</b><p>Commerce</p><small>التخصص المذكور في الحالة.</small></div><div class="info-card"><b>[X, Y, Z]</b><p>Three evidenced skills</p><small>مهارات مرتبطة بمشروع مريم.</small></div><div class="info-card"><b>[sector]</b><p>Entry-level Operations</p><small>الوظيفة المستهدفة في الحالة.</small></div></div>
+<div class="callout">هذا Prompt المصدر بعد تعبئة الحقول بمثال افتراضي. النص الأصلي محفوظ في الشريحة السابقة، والناتج التالي مثال توضيحي يجب مراجعته.</div>
+</main><div class="study-extra"><b>للمذاكرة:</b> لا تكتب قيمة في أي حقل إلا إذا كانت معلومة صحيحة ويمكن إثباتها.</div><div class="trainer-note"><b>ملاحظة المدرب:</b> اطلب من الطلاب تحديد كل قيمة في Prompt ثم الإشارة إلى مصدرها في بطاقة مريم.</div></section><section aria-hidden="true" class="slide" data-section="CHATGPT · SUMMARY EXAMPLE" data-title="من الملخص العام إلى الملخص المدعوم">
+<header class="slide-topline">
+<div><span class="slide-number">17</span><span class="section-label">GET HIRED · MODULE 05 · CHATGPT · SUMMARY EXAMPLE</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">من الملخص العام إلى الملخص المدعوم</h1>
+<p class="subtitle" dir="auto">الدقة أهم من كثرة الصفات</p>
+</div>
+<main class="body" dir="rtl"><div class="compare example-compare">
+<div class="info-card"><span class="tag-bad">BEFORE · عام وغير مميز</span><p class="sample-weak" dir="ltr">I am a hardworking and motivated person with good communication skills.</p><small>لا يوضح التخصص أو الدليل أو الوظيفة المستهدفة.</small></div>
+<div class="info-card"><span class="tag-good">AFTER · مبني على حالة مريم</span><p class="sample-strong" dir="ltr">Recent Commerce graduate with basic Microsoft Excel skills. Organised sales records and prepared a summary table as part of a university project. Interested in an entry-level operations role.</p><small>ثلاث جمل، وكل معلومة لها أصل في ملف الحالة.</small></div>
+</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المثال لا يمثل ناتجًا موثقًا من ChatGPT؛ إنه مثال تدريبي صيغ لشرح الفرق.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> اطلب من المجموعة تحديد أي عبارة تحتاج دليلًا قبل اعتمادها.</div>
+</section><section aria-hidden="true" class="slide" data-section="CASE APPLICATION" data-title="مخرج التطبيق 02: الملخص المهني">
+<header class="slide-topline"><div><span class="slide-number">18</span><span class="section-label">GET HIRED · MODULE 05 · CASE APPLICATION</span></div><span class="module-pill">CV OUTPUT</span></header>
+<div class="heading"><h1 dir="auto">مخرج التطبيق 02: الملخص المهني</h1><p class="subtitle" dir="auto">Professional Summary — ثلاث جمل مكتملة باستخدام Prompt المصدر وحقائق مريم فقط.</p></div>
+<main class="body" dir="rtl"><div class="cv-result-layout">
+<div class="cv-paper"><div class="cv-paper-kicker">SAMPLE CV OUTPUT · 02 · SUMMARY</div><div class="cv-section-heading" dir="ltr">PROFESSIONAL SUMMARY</div><p class="cv-output-text" dir="ltr">Recent Commerce graduate with basic Microsoft Excel skills. Organised sales records and prepared a summary table as part of a university project. Interested in an entry-level operations role.</p></div>
+<aside class="cv-explain"><div class="cv-explain-label">ماذا يرى مسؤول التوظيف؟</div><p>الملخص يجيب عن ثلاثة أسئلة: ما تخصص مريم؟ ما المهارة التي تملك دليلًا عليها؟ وما المجال الذي تستهدفه؟</p><div class="cv-proof"><b>FACT CHECK</b><p>ثلاث جمل كما يطلب Prompt المصدر. لا يدّعي خبرة وظيفية أو مستوى Excel متقدمًا.</p></div></aside>
+</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذا مثال تدريبي مبني على الحقائق المحددة في ملف مريم. الحقول الموضوعة بين أقواس مربعة يجب استبدالها بمعلومات حقيقية قبل استخدام أي CV فعلي.</div><div class="trainer-note"><b>ملاحظة المدرب:</b> اطلب من المتدربين مطابقة كل سطر في نموذج المخرجات مع بطاقة الحالة. اسأل: ما الدليل؟ وما المعلومة التي ما زالت ناقصة؟</div></section><section aria-hidden="true" class="slide" data-section="CV STRUCTURE · EDUCATION" data-title="القسم الثالث: التعليم (Education)">
+<header class="slide-topline">
+<div><span class="slide-number">19</span><span class="section-label">GET HIRED · MODULE 05 · CV STRUCTURE · EDUCATION</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">القسم الثالث: التعليم (Education)</h1>
+<p class="subtitle" dir="auto">قدّم بيانات تعليمية صحيحة وسهلة القراءة</p>
+</div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="info-card"><span class='\"card-tag\"'>DEGREE</span><b>اسم الدرجة</b><p>استخدم الاسم الرسمي للدرجة والتخصص.</p></div><div class="info-card"><span class='\"card-tag\"'>INSTITUTION</span><b>المؤسسة</b><p>اكتب اسم الجامعة أو المعهد بدقة.</p></div><div class="info-card"><span class='\"card-tag\"'>DATES</span><b>التواريخ</b><p>تاريخ التخرج أو Expected Graduation عند ملاءمته.</p></div><div class="info-card"><span class='\"card-tag\"'>RELEVANCE</span><b>المقررات/المشروع</b><p>أضف ما يخدم الوظيفة المستهدفة فقط.</p></div></div><div class="callout">لا تحوّل مقررًا دراسيًا إلى خبرة وظيفية، ولا تخترع GPA أو مرتبة أو جائزة.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> يمكن للخريج الحديث إضافة مقررات أو مشروع ذي صلة عند الحاجة، مع إبقائها ضمن التعليم أو المشروعات.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> اسأل: هل هذا مشروع جامعي أم وظيفة؟ حافظ على التصنيف الصحيح.</div>
+</section><section aria-hidden="true" class="slide" data-section="CASE APPLICATION" data-title="مخرج التطبيق 03: التعليم">
+<header class="slide-topline"><div><span class="slide-number">20</span><span class="section-label">GET HIRED · MODULE 05 · CASE APPLICATION</span></div><span class="module-pill">CV OUTPUT</span></header>
+<div class="heading"><h1 dir="auto">مخرج التطبيق 03: التعليم</h1><p class="subtitle" dir="auto">Education — نُظهر المؤهل كما نعرفه، ونترك اسم المؤسسة والتاريخ لاستكمالهما.</p></div>
+<main class="body" dir="rtl"><div class="cv-result-layout">
+<div class="cv-paper"><div class="cv-paper-kicker">SAMPLE CV OUTPUT · 03 · EDUCATION</div><div class="cv-section-heading" dir="ltr">EDUCATION</div><div class="cv-item-title" dir="ltr">Commerce Graduate</div><div class="cv-item-meta" dir="ltr">[University / Institution]  |  [Graduation Year]</div><p class="cv-output-text" dir="ltr">Relevant academic project: Sales-record organisation and summary-table preparation.</p></div>
+<aside class="cv-explain"><div class="cv-explain-label">ماذا يرى مسؤول التوظيف؟</div><p>يظهر المؤهل أولًا، ثم المؤسسة والتاريخ. يمكن إضافة مشروع أكاديمي ذي صلة عندما يدعم الوظيفة المستهدفة.</p><div class="cv-proof"><b>FACT CHECK</b><p>المصدر التعليمي المتاح هو Commerce Graduate فقط. اسم الجامعة وسنة التخرج لم يردا في ملف الحالة، فبقيا حقولًا مؤقتة.</p></div></aside>
+</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذا مثال تدريبي مبني على الحقائق المحددة في ملف مريم. الحقول الموضوعة بين أقواس مربعة يجب استبدالها بمعلومات حقيقية قبل استخدام أي CV فعلي.</div><div class="trainer-note"><b>ملاحظة المدرب:</b> اطلب من المتدربين مطابقة كل سطر في نموذج المخرجات مع بطاقة الحالة. اسأل: ما الدليل؟ وما المعلومة التي ما زالت ناقصة؟</div></section><section aria-hidden="true" class="slide" data-section="CV STRUCTURE · EXPERIENCE" data-title="القسم الرابع: الخبرة (Experience)">
+<header class="slide-topline">
+<div><span class="slide-number">21</span><span class="section-label">GET HIRED · MODULE 05 · CV STRUCTURE · EXPERIENCE</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">القسم الرابع: الخبرة (Experience)</h1>
+<p class="subtitle" dir="auto">اختر عنوانًا يعكس نوع التجربة الحقيقي</p>
+</div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="info-card"><span class='\"card-tag\"'>EMPLOYMENT</span><b>عمل فعلي</b><p>وظيفة أو عمل جزئي حقيقي.</p></div><div class="info-card"><span class='\"card-tag\"'>INTERNSHIP</span><b>تدريب</b><p>جهة التدريب، المدة، والمهام التي نفذتها.</p></div><div class="info-card"><span class='\"card-tag\"'>PROJECTS</span><b>مشروعات</b><p>مشروع جامعي أو شخصي بدور واضح.</p></div><div class="info-card"><span class='\"card-tag\"'>VOLUNTEERING</span><b>تطوع</b><p>مبادرة تطوعية ومساهمة محددة.</p></div></div><div class="callout">عدم وجود وظيفة سابقة لا يعني عدم وجود أدلة مهنية؛ استخدم التدريب والمشروعات والتطوع بوضوح.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المشروعات والتدريب والتطوع أمثلة على أدلة يمكن للخريج استخدامها دون الادعاء بوجود وظيفة مدفوعة.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> لا تسمح للمتدرب بوضع مشروع جامعي تحت وظيفة مدفوعة إذا لم يكن كذلك.</div>
+</section><section aria-hidden="true" class="slide" data-section="CV STRUCTURE · EXPERIENCE BULLETS" data-title="اكتب نقاطًا مهنية تستند إلى أدلة">
+<header class="slide-topline">
+<div><span class="slide-number">22</span><span class="section-label">GET HIRED · MODULE 05 · CV STRUCTURE · EXPERIENCE BULLETS</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">اكتب نقاطًا مهنية تستند إلى أدلة</h1>
+<p class="subtitle" dir="auto">استخدم فعلًا واضحًا ومهمة ومخرجًا يمكن شرحه</p>
+</div>
+<main class="body" dir="rtl"><div class="compare example-compare">
+<div class="info-card"><span class="tag-bad">BEFORE · وصف مبهم</span><p class="sample-weak" dir="ltr">Responsible for many tasks and good communication.</p><small>لا يحدد المهمة أو الأداة أو المخرج.</small></div>
+<div class="info-card"><span class="tag-good">AFTER · مريم</span><p class="sample-strong" dir="ltr">Organised project sales records using basic Microsoft Excel and prepared a summary table for academic review.</p><small>المهمة والأداة والمخرج واضحة، دون اختراع رقم أو نتيجة.</small></div>
+</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذا مثال تدريبي. يجب استبدال تفاصيله بمهام حقيقية من تجربة الطالب.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> اسأل: ما الفعل الذي نفذته؟ ما الأداة التي استخدمتها فعلًا؟ وما الناتج الذي تستطيع وصفه؟</div>
+</section><section aria-hidden="true" class="slide" data-section="CASE APPLICATION" data-title="مخرج التطبيق 04: الخبرة بالمشروعات">
+<header class="slide-topline"><div><span class="slide-number">23</span><span class="section-label">GET HIRED · MODULE 05 · CASE APPLICATION</span></div><span class="module-pill">CV OUTPUT</span></header>
+<div class="heading"><h1 dir="auto">مخرج التطبيق 04: الخبرة بالمشروعات</h1><p class="subtitle" dir="auto">Project Experience — لأن مريم لا تملك وظيفة سابقة، نعرض مشروعها كخبرة أكاديمية لا كوظيفة.</p></div>
+<main class="body" dir="rtl"><div class="cv-result-layout">
+<div class="cv-paper"><div class="cv-paper-kicker">SAMPLE CV OUTPUT · 04 · EXPERIENCE / PROJECT</div><div class="cv-section-heading" dir="ltr">PROJECT EXPERIENCE</div><div class="cv-item-title" dir="ltr">University Project — Sales Records Organisation</div><div class="cv-item-meta" dir="ltr">Academic Project</div><ul class="cv-output-list" dir="ltr"><li>Organised project sales records using basic Microsoft Excel.</li><li>Prepared a summary table for academic review.</li></ul></div>
+<aside class="cv-explain"><div class="cv-explain-label">ماذا يرى مسؤول التوظيف؟</div><p>نستخدم عنوانًا واضحًا للمشروع، ثم نقطتين تبدأان بفعل يصف ما نفذته مريم وما أنتجته.</p><div class="cv-proof"><b>FACT CHECK</b><p>لا نكتب اسم شركة أو وظيفة أو مدة غير متاحة. لا نضيف نسبة تحسن أو رقمًا غير موثق.</p></div></aside>
+</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذا مثال تدريبي مبني على الحقائق المحددة في ملف مريم. الحقول الموضوعة بين أقواس مربعة يجب استبدالها بمعلومات حقيقية قبل استخدام أي CV فعلي.</div><div class="trainer-note"><b>ملاحظة المدرب:</b> اطلب من المتدربين مطابقة كل سطر في نموذج المخرجات مع بطاقة الحالة. اسأل: ما الدليل؟ وما المعلومة التي ما زالت ناقصة؟</div></section><section aria-hidden="true" class="slide" data-section="CV STRUCTURE · FINAL SECTIONS" data-title="القسم الخامس: المهارات (Skills)">
+<header class="slide-topline">
+<div><span class="slide-number">24</span><span class="section-label">GET HIRED · MODULE 05 · CV STRUCTURE · FINAL SECTIONS</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">القسم الخامس: المهارات (Skills)</h1>
+<p class="subtitle" dir="auto">أدرج ما تستطيع إثباته بمثال أو مهمة فعلية.</p>
+</div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="info-card"><b>VERIFIED SKILL · مهارة مثبتة</b><p>Basic Microsoft Excel</p><small>استخدمتها مريم في تنظيم سجل مبيعات المشروع.</small></div><div class="info-card"><b>SUPPORTING SKILL · مهارة مساندة</b><p>Data Organisation</p><small>يتضح أثرها في إعداد جدول ملخص من البيانات.</small></div></div><div class="callout">لا تكتب مهارة لمجرد أنها مطلوبة في إعلان الوظيفة. اكتبها عندما تستطيع شرح أين وكيف استخدمتها.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذه الأقسام الثلاثة واردة ضمن قائمة المصدر. يجب أن تكون المهارات ومستويات اللغات والشهادات دقيقة.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> ناقش كيف يكتب طالب A2 مستوى الإنجليزية دون مبالغة.</div>
+</section><section aria-hidden="true" class="slide" data-section="CASE APPLICATION" data-title="مخرج التطبيق 05: المهارات">
+<header class="slide-topline"><div><span class="slide-number">25</span><span class="section-label">GET HIRED · MODULE 05 · CASE APPLICATION</span></div><span class="module-pill">CV OUTPUT</span></header>
+<div class="heading"><h1 dir="auto">مخرج التطبيق 05: المهارات</h1><p class="subtitle" dir="auto">Skills — نحوّل المهارات المثبتة إلى قائمة قصيرة قابلة للمراجعة.</p></div>
+<main class="body" dir="rtl"><div class="cv-result-layout">
+<div class="cv-paper"><div class="cv-paper-kicker">SAMPLE CV OUTPUT · 05 · SKILLS</div><div class="cv-section-heading" dir="ltr">SKILLS</div><ul class="cv-output-list" dir="ltr"><li>Basic Microsoft Excel</li><li>Data Organisation</li><li>Summary Table Preparation</li></ul></div>
+<aside class="cv-explain"><div class="cv-explain-label">ماذا يرى مسؤول التوظيف؟</div><p>كل مهارة مرتبطة بما فعلته مريم في المشروع. لم نضف مهارات عامة مثل Leadership أو Advanced Excel دون دليل.</p><div class="cv-proof"><b>FACT CHECK</b><p>Excel الأساسي وتنظيم البيانات وإعداد جدول ملخص كلها مدعومة بمهمة المشروع الافتراضي.</p></div></aside>
+</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذا مثال تدريبي مبني على الحقائق المحددة في ملف مريم. الحقول الموضوعة بين أقواس مربعة يجب استبدالها بمعلومات حقيقية قبل استخدام أي CV فعلي.</div><div class="trainer-note"><b>ملاحظة المدرب:</b> اطلب من المتدربين مطابقة كل سطر في نموذج المخرجات مع بطاقة الحالة. اسأل: ما الدليل؟ وما المعلومة التي ما زالت ناقصة؟</div></section><section aria-hidden="true" class="slide" data-section="SECTION APPLICATION" data-title="القسم السادس: اللغات (Languages)">
+<header class="slide-topline"><div><span class="slide-number">26</span><span class="section-label">GET HIRED · MODULE 05 · SECTION APPLICATION</span></div><span class="module-pill">CV OUTPUT</span></header>
+<div class="heading"><h1 dir="auto">القسم السادس: اللغات (Languages)</h1><p class="subtitle" dir="auto">اكتب اللغة ومستواها الفعلي؛ لا تحوّل مستوى التعلم إلى ادعاء بالطلاقة.</p></div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="info-card"><b>LANGUAGE</b><p>اسم اللغة</p><small>Arabic · English</small></div><div class="info-card"><b>PROFICIENCY</b><p>المستوى الحقيقي</p><small>Native · A2 · B1 · B2 ... حسب المستوى الفعلي</small></div></div><div class="callout">المستوى يجب أن يكون قابلًا للدفاع عنه في مقابلة أو اختبار. لا تكتب Fluent لمجرد أن الوظيفة تتطلب الإنجليزية.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> مستوى اللغة معلومة مهنية. اكتب وصفًا صادقًا ومفهومًا، ولا تستخدم كلمة Fluent دون أساس.</div><div class="trainer-note"><b>ملاحظة المدرب:</b> اسأل المتدرب كيف يثبت مستوى اللغة. لا تحول المستوى إلى حكم من أداة AI.</div></section><section aria-hidden="true" class="slide" data-section="CASE APPLICATION" data-title="مخرج التطبيق 06: اللغات">
+<header class="slide-topline"><div><span class="slide-number">27</span><span class="section-label">GET HIRED · MODULE 05 · CASE APPLICATION</span></div><span class="module-pill">CV OUTPUT</span></header>
+<div class="heading"><h1 dir="auto">مخرج التطبيق 06: اللغات</h1><p class="subtitle" dir="auto">Languages — نكتب اسم اللغة ومستواها دون مبالغة أو ترجمة مضللة.</p></div>
+<main class="body" dir="rtl"><div class="cv-result-layout">
+<div class="cv-paper"><div class="cv-paper-kicker">SAMPLE CV OUTPUT · 06 · LANGUAGES</div><div class="cv-section-heading" dir="ltr">LANGUAGES</div><ul class="cv-output-list" dir="ltr"><li>Arabic — Native</li><li>English — A2</li></ul></div>
+<aside class="cv-explain"><div class="cv-explain-label">ماذا يرى مسؤول التوظيف؟</div><p>هذه الصياغة توضح اللغة ومستوى الاستخدام. لا نستخدم Fluent أو Advanced عندما تكون البيانات المتاحة A2.</p><div class="cv-proof"><b>FACT CHECK</b><p>مستوى اللغة كما ورد في مثال الحالة السابق. لا نرفع مستوى الإنجليزية بناءً على رغبة صاحب السيرة.</p></div></aside>
+</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذا مثال تدريبي مبني على الحقائق المحددة في ملف مريم. الحقول الموضوعة بين أقواس مربعة يجب استبدالها بمعلومات حقيقية قبل استخدام أي CV فعلي.</div><div class="trainer-note"><b>ملاحظة المدرب:</b> اطلب من المتدربين مطابقة كل سطر في نموذج المخرجات مع بطاقة الحالة. اسأل: ما الدليل؟ وما المعلومة التي ما زالت ناقصة؟</div></section><section aria-hidden="true" class="slide" data-section="SECTION APPLICATION" data-title="القسم السابع: الشهادات (Certifications)">
+<header class="slide-topline"><div><span class="slide-number">28</span><span class="section-label">GET HIRED · MODULE 05 · SECTION APPLICATION</span></div><span class="module-pill">CV OUTPUT</span></header>
+<div class="heading"><h1 dir="auto">القسم السابع: الشهادات (Certifications)</h1><p class="subtitle" dir="auto">أدرج الشهادات المكتملة فقط مع اسمها والجهة والتاريخ.</p></div>
+<main class="body" dir="rtl"><div class="grid grid-3"><div class="info-card"><b>CERTIFICATE</b><p>اسم الشهادة</p></div><div class="info-card"><b>PROVIDER</b><p>الجهة المانحة</p></div><div class="info-card"><b>DATE</b><p>تاريخ الإتمام</p></div></div><div class="callout">الدورة التي لم تكتمل ليست شهادة مكتملة. لا تكتب اسم شهادة أو جهة أو تاريخًا لمجرد تحسين شكل CV.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> تحتاج الشهادة إلى اسم دقيق وجهة مانحة وتاريخ إتمام صحيح. لا تخلط بين دورة جارية وشهادة مكتملة.</div><div class="trainer-note"><b>ملاحظة المدرب:</b> في حالة مريم لا توجد شهادة مكتملة مثبتة؛ لذلك نعرض قرار عدم إدراجها.</div></section><section aria-hidden="true" class="slide" data-section="CASE APPLICATION" data-title="مخرج التطبيق 07: الشهادات">
+<header class="slide-topline"><div><span class="slide-number">29</span><span class="section-label">GET HIRED · MODULE 05 · CASE APPLICATION</span></div><span class="module-pill">CV OUTPUT</span></header>
+<div class="heading"><h1 dir="auto">مخرج التطبيق 07: الشهادات</h1><p class="subtitle" dir="auto">Certifications — أحيانًا يكون القرار الصحيح هو عدم إضافة قسم لا توجد له بيانات موثقة.</p></div>
+<main class="body" dir="rtl"><div class="cv-result-layout">
+<div class="cv-paper"><div class="cv-paper-kicker">SAMPLE CV OUTPUT · 07 · CERTIFICATIONS</div><div class="cv-section-heading" dir="ltr">CERTIFICATIONS</div><div class="cv-empty-state" dir="ltr"><strong>No verified completed certifications provided.</strong><span>Do not include this section until a completed certification can be verified.</span></div></div>
+<aside class="cv-explain"><div class="cv-explain-label">ماذا يرى مسؤول التوظيف؟</div><p>لا نضع شهادة افتراضية أو دورة غير مكتملة. إذا لم توجد شهادة مكتملة، يمكن حذف القسم بدلًا من ترك ادعاء غير صحيح.</p><div class="cv-proof"><b>FACT CHECK</b><p>لا توجد شهادة في بيانات مريم. هذا عرض لقرار التحرير وليس شهادة أو مخرجًا رسميًا.</p></div></aside>
+</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذا مثال تدريبي مبني على الحقائق المحددة في ملف مريم. الحقول الموضوعة بين أقواس مربعة يجب استبدالها بمعلومات حقيقية قبل استخدام أي CV فعلي.</div><div class="trainer-note"><b>ملاحظة المدرب:</b> اطلب من المتدربين مطابقة كل سطر في نموذج المخرجات مع بطاقة الحالة. اسأل: ما الدليل؟ وما المعلومة التي ما زالت ناقصة؟</div></section><section aria-hidden="true" class="slide" data-section="COMPLETE CASE OUTPUT" data-title="السيرة الذاتية الكاملة لمريم">
+<header class="slide-topline"><div><span class="slide-number">30</span><span class="section-label">GET HIRED · MODULE 05 · COMPLETE CASE OUTPUT</span></div><span class="module-pill">CV OUTPUT</span></header>
+<div class="heading"><h1 dir="auto">السيرة الذاتية الكاملة لمريم</h1><p class="subtitle" dir="auto">Complete CV — الآن نرى الأقسام السبعة في مستند واحد قبل الانتقال إلى Grammarly وCanva.</p></div>
+<main class="body" dir="rtl"><div class="cv-paper cv-full-paper"><div class="cv-name" dir="ltr">Maryam Ahmed</div><div class="cv-contact" dir="ltr">[Professional Email] | [Phone Number] | [City, Country]</div>
+<div class="cv-section-heading" dir="ltr">PROFESSIONAL SUMMARY</div><p class="cv-output-text" dir="ltr">Recent Commerce graduate with basic Microsoft Excel skills. Organised sales records and prepared a summary table as part of a university project. Interested in an entry-level operations role.</p>
+<div class="cv-section-heading" dir="ltr">EDUCATION</div><div class="cv-item-title" dir="ltr">Commerce Graduate</div><div class="cv-item-meta" dir="ltr">[University / Institution] | [Graduation Year]</div>
+<div class="cv-section-heading" dir="ltr">PROJECT EXPERIENCE</div><div class="cv-item-title" dir="ltr">University Project — Sales Records Organisation</div><ul class="cv-output-list" dir="ltr"><li>Organised project sales records using basic Microsoft Excel.</li><li>Prepared a summary table for academic review.</li></ul>
+<div class="cv-section-heading" dir="ltr">SKILLS</div><p class="cv-output-text" dir="ltr">Basic Microsoft Excel · Data Organisation · Summary Table Preparation</p>
+<div class="cv-section-heading" dir="ltr">LANGUAGES</div><p class="cv-output-text" dir="ltr">Arabic — Native · English — A2</p>
+<div class="cv-cert-note">CERTIFICATIONS: not included because no completed, verified certification was provided in this case.</div></div>
+<div class="callout">قبل اعتبار هذا CV مكتملًا، يجب استبدال كل حقل بين [ ] ببيانات صحيحة، والتحقق من الاسم والتواريخ ووسائل الاتصال.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذه أول نسخة مجمعة. كل قسم ظهر بعد شرحه وتطبيقه. البيانات الناقصة واضحة، وقسم الشهادات غير مدرج كادعاء غير مدعوم.</div><div class="trainer-note"><b>ملاحظة المدرب:</b> اطلب من المجموعة تتبع كل سطر إلى بطاقة الحالة. أي سطر لا يجدون له مصدرًا يجب حذفه أو تحويله إلى سؤال لصاحب السيرة.</div></section><section aria-hidden="true" class="slide" data-section="SOURCE CONTROL · OPEN ISSUE" data-title="موضع الغموض في المصدر: سبعة أقسام وخمسة Prompts">
+<header class="slide-topline">
+<div><span class="slide-number">31</span><span class="section-label">GET HIRED · MODULE 05 · SOURCE CONTROL · OPEN ISSUE</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">موضع الغموض في المصدر: سبعة أقسام وخمسة Prompts</h1>
+<p class="subtitle" dir="auto">نحافظ على النصين ولا نخترع قرارًا غير موجود</p>
+</div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="info-card"><span class='\"card-tag\"'>SOURCE STATEMENT 1</span><b>سبعة أقسام</b><p>Header · Summary · Education · Experience · Skills · Languages · Certifications</p></div><div class="info-card"><span class='\"card-tag\"'>SOURCE STATEMENT 2</span><b>خمسة Prompts</b><p>Prompt card set for CV writing — 5 AI prompts, one per CV section.</p></div></div><div class="callout warning">هناك اختلاف عددي في المصدر نفسه: سبعة أقسام للسيرة مقابل خمسة Prompts. لا يحدد المصدر أي الأقسام السبعة تُجمع.</div><div class="panel"><h3>Implementation proposal — requires programme-owner approval</h3><p>يمكن استخدام خمس بطاقات تدريبية: Summary؛ Experience/Projects؛ Education؛ Skills/Languages؛ Certifications/job alignment. يظل Header إدخالًا يدويًا. هذا تجميع مقترح وليس حلًا رسميًا مثبتًا في المصدر.</p></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المصدر يذكر الأقسام السبعة ومجموعة من خمسة Prompts. لم يحسم أي الأقسام تُجمع. أي توزيع مقترح يجب اعتماده من مالك البرنامج.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> لا تعرض التجميع المقترح بوصفه قرارًا رسميًا. اطلب اعتمادًا قبل طباعة البطاقات نهائيًا.</div>
+</section><section aria-hidden="true" class="slide" data-section="CHATGPT · PROMPT DESIGN" data-title="قواعد صياغة Prompts لبقية الأقسام">
+<header class="slide-topline">
+<div><span class="slide-number">32</span><span class="section-label">GET HIRED · MODULE 05 · CHATGPT · PROMPT DESIGN</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">قواعد صياغة Prompts لبقية الأقسام</h1>
+<p class="subtitle" dir="auto">أضف سياقًا وحقائق وحدودًا واضحة</p>
+</div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="info-card"><span class='\"card-tag\"'>TASK</span><b>المهمة</b><p>ما القسم الذي تريد تنظيمه؟</p></div><div class="info-card"><span class='\"card-tag\"'>FACTS</span><b>الحقائق</b><p>أدخل ملاحظاتك وبياناتك الحقيقية.</p></div><div class="info-card"><span class='\"card-tag\"'>CONSTRAINT</span><b>القيود</b><p>لا يخترع خبرة أو مهارة أو رقمًا.</p></div><div class="info-card"><span class='\"card-tag\"'>OUTPUT</span><b>المخرج</b><p>حدد عدد النقاط أو مستوى اللغة أو التنسيق.</p></div></div><div class="callout">هذا إطار إثرائي لبناء Prompts إضافية. النص الوحيد الحرفي في المصدر هو Prompt الملخص المهني.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المصدر يذكر توزيع Prompt cards للمدرب، لكنه لا يورد نصوص البطاقات الخمس في التفريغ الأصلي.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> استخدم هذه القواعد بوصفها مساعدة تعليمية لا باعتبارها صيغة رسمية من المصدر.</div>
+</section><section aria-hidden="true" class="slide" data-section="CHATGPT · PROMPT BUILDER" data-title="ابنِ Prompt مخصصًا من حقائقك">
+<header class="slide-topline">
+<div><span class="slide-number">33</span><span class="section-label">GET HIRED · MODULE 05 · CHATGPT · PROMPT BUILDER</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">ابنِ Prompt مخصصًا من حقائقك</h1>
+<p class="subtitle" dir="auto">أداة محلية للتدريب — لا ترسل بياناتك تلقائيًا</p>
+</div>
+<main class="body" dir="rtl">
+<div class="builder panel">
+<div class="builder-intro"><span class="eyebrow">LOCAL PROMPT BUILDER · TRAINER-DESIGNED</span><p>أدخل معلومات حقيقية فقط. سيُنشأ Prompt محليًا داخل الصفحة، ولن تُرسل البيانات تلقائيًا إلى أي خدمة.</p></div>
+<div class="builder-grid">
+<label>Target role<input id="b-role" placeholder="Entry-level operations assistant"/></label>
+<label>Real tasks / project notes<input id="b-tasks" placeholder="Organised sales records in a university project"/></label>
+<label>Tools actually used<input id="b-tools" placeholder="Excel basics"/></label>
+<label>Evidence / output<input id="b-evidence" placeholder="Prepared a summary table"/></label>
+</div>
+<button class="primary-btn" id="build-prompt">إنشاء Prompt</button>
+<div aria-live="polite" class="generated-prompt" id="generated-prompt">سيظهر Prompt هنا بعد إدخال البيانات.</div>
+<button class="copy-btn" disabled="" id="copy-generated">نسخ Prompt</button>
+</div>
+</main>
+<div class="study-extra"><b>للمذاكرة:</b> هذا منشئ Prompt تدريبي إضافي. النص الناتج يظل اقتراحًا؛ راجع كل معلومة قبل نسخه إلى ChatGPT.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> استخدم بيانات افتراضية في العرض. وضّح أن الحقول لا تُحفظ ولا تُرسل من الصفحة، وأن النسخ يتم بقرار الطالب.</div>
+</section><section aria-hidden="true" class="slide" data-section="PROMPT CARDS · 01" data-title="بطاقة Prompt 01: الملخص المهني">
+<header class="slide-topline">
+<div><span class="slide-number">34</span><span class="section-label">GET HIRED · MODULE 05 · PROMPT CARDS · 01</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">بطاقة Prompt 01: الملخص المهني</h1>
+<p class="subtitle" dir="auto">بطاقة المصدر — دون إعادة صياغة</p>
+</div>
+<main class="body" dir="rtl"><div class="prompt-box"><div class="prompt-label">CARD 01 · SUMMARY · SOURCE PROMPT</div><pre dir="ltr">Write a 3-sentence CV summary for a fresh graduate in [field] with skills in [X, Y, Z] targeting [sector].</pre><button class="copy-btn" data-copy="Write a 3-sentence CV summary for a fresh graduate in [field] with skills in [X, Y, Z] targeting [sector].">نسخ Prompt</button></div><div class="callout">هذا هو النص الأصلي. أدخل تخصصًا ومهارات حقيقية وقطاعًا مستهدفًا.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> حافظ على النص الأصلي كما هو. لا تطلب من النموذج اختراع مهارات أو خبرة.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> استخدمها أولًا في العرض الحي. اجعل الطالب يملأ المتغيرات.</div>
+</section><section aria-hidden="true" class="slide" data-section="PROMPT CARDS · 02" data-title="بطاقة Prompt 02: الخبرة والمشروعات">
+<header class="slide-topline">
+<div><span class="slide-number">35</span><span class="section-label">GET HIRED · MODULE 05 · PROMPT CARDS · 02</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">بطاقة Prompt 02: الخبرة والمشروعات</h1>
+<p class="subtitle" dir="auto">صياغة مقترحة لتنظيم أدلة الطالب</p>
+</div>
+<main class="body" dir="rtl"><div class="prompt-box"><div class="prompt-label">CARD 02 · EXPERIENCE / PROJECTS · TRAINER-DESIGNED</div><pre dir="ltr">Turn these real tasks into 3 concise CV bullet points for a [target role]. Use action verbs, name tools only if I used them, and describe outcomes only when supported by my notes. My notes: [paste factual notes].</pre><button class="copy-btn" data-copy="Turn these real tasks into 3 concise CV bullet points for a [target role]. Use action verbs, name tools only if I used them, and describe outcomes only when supported by my notes. My notes: [paste factual notes].">نسخ Prompt</button></div><div class="callout">بطاقة تدريبية مقترحة ضمن تجميع الخمسة Prompts؛ ليست نصًا حرفيًا في المصدر.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> اطلب من AI تنظيم الملاحظات فقط. لا تسمح له باختراع اسم جهة أو تاريخ أو نتيجة.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> ذكّر الطلاب أن المشروع الجامعي لا يصبح وظيفة لمجرد صياغته بلغة احترافية.</div>
+</section><section aria-hidden="true" class="slide" data-section="PROMPT CARDS · 03" data-title="بطاقة Prompt 03: التعليم">
+<header class="slide-topline">
+<div><span class="slide-number">36</span><span class="section-label">GET HIRED · MODULE 05 · PROMPT CARDS · 03</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">بطاقة Prompt 03: التعليم</h1>
+<p class="subtitle" dir="auto">تنسيق بيانات التعليم دون اختلاق</p>
+</div>
+<main class="body" dir="rtl"><div class="prompt-box"><div class="prompt-label">CARD 03 · EDUCATION · TRAINER-DESIGNED</div><pre dir="ltr">Format my education details for a CV using standard headings. Degree: [exact degree]. Institution: [institution]. Dates: [dates]. Relevant coursework or project: [details]. Do not invent grades, awards, or graduation dates.</pre><button class="copy-btn" data-copy="Format my education details for a CV using standard headings. Degree: [exact degree]. Institution: [institution]. Dates: [dates]. Relevant coursework or project: [details]. Do not invent grades, awards, or graduation dates.">نسخ Prompt</button></div><div class="callout">بطاقة تدريبية مقترحة؛ تحقق من الاسم الرسمي للدرجة والمؤسسة والتواريخ.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> لا تضع درجات أو جوائز أو تواريخ غير مؤكدة.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> إذا كان الطالب ما زال يدرس، استخدم تاريخ التخرج المتوقع عند ملاءمته.</div>
+</section><section aria-hidden="true" class="slide" data-section="PROMPT CARDS · 04" data-title="بطاقة Prompt 04: المهارات واللغات">
+<header class="slide-topline">
+<div><span class="slide-number">37</span><span class="section-label">GET HIRED · MODULE 05 · PROMPT CARDS · 04</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">بطاقة Prompt 04: المهارات واللغات</h1>
+<p class="subtitle" dir="auto">التنظيم لا يعني المبالغة</p>
+</div>
+<main class="body" dir="rtl"><div class="prompt-box"><div class="prompt-label">CARD 04 · SKILLS / LANGUAGES · TRAINER-DESIGNED</div><pre dir="ltr">Organise my verified skills and language levels into clear CV sections for a [target role]. Skills I can demonstrate: [skills]. Tools I have used: [tools]. Languages and honest proficiency levels: [levels]. Do not upgrade my skill or language level.</pre><button class="copy-btn" data-copy="Organise my verified skills and language levels into clear CV sections for a [target role]. Skills I can demonstrate: [skills]. Tools I have used: [tools]. Languages and honest proficiency levels: [levels]. Do not upgrade my skill or language level.">نسخ Prompt</button></div><div class="callout">بطاقة تدريبية مقترحة تجمع Skills وLanguages. مستوى اللغة يجب أن يبقى كما هو.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> استخدم مستويات يمكن للطالب الدفاع عنها في مقابلة العمل.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> اربط كل مهارة بمثال عملي أو مشروع أو مهمة.</div>
+</section><section aria-hidden="true" class="slide" data-section="PROMPT CARDS · 05" data-title="بطاقة Prompt 05: الشهادات ومواءمة الوظيفة">
+<header class="slide-topline">
+<div><span class="slide-number">38</span><span class="section-label">GET HIRED · MODULE 05 · PROMPT CARDS · 05</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">بطاقة Prompt 05: الشهادات ومواءمة الوظيفة</h1>
+<p class="subtitle" dir="auto">قارن الكلمات المفتاحية بالأدلة المتاحة</p>
+</div>
+<main class="body" dir="rtl"><div class="prompt-box"><div class="prompt-label">CARD 05 · CERTIFICATIONS / JOB ALIGNMENT · TRAINER-DESIGNED</div><pre dir="ltr">Format these completed certifications for my CV: [certificate, provider, completion date]. Then compare my verified CV content with this job description: [paste job description]. List relevant keywords only when my evidence supports them. Do not invent qualifications or experience.</pre><button class="copy-btn" data-copy="Format these completed certifications for my CV: [certificate, provider, completion date]. Then compare my verified CV content with this job description: [paste job description]. List relevant keywords only when my evidence supports them. Do not invent qualifications or experience.">نسخ Prompt</button></div><div class="callout">بطاقة تدريبية مقترحة. Header يُدخل يدويًا، ولا يجوز اختراع شهادة أو ادعاء.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذه البطاقة تدمج تنسيق الشهادات مع مقارنة محتوى CV بوصف الوظيفة. هذا حل مقترح لمشكلة عدد البطاقات.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> اعرض موضع الغموض في المصدر بوضوح عند توزيع البطاقات.</div>
+</section><section aria-hidden="true" class="slide" data-section="LIVE DEMO · PREPARATION" data-title="العرض العملي: جهّز الحقائق قبل Prompt">
+<header class="slide-topline">
+<div><span class="slide-number">39</span><span class="section-label">GET HIRED · MODULE 05 · LIVE DEMO · PREPARATION</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">العرض العملي: جهّز الحقائق قبل Prompt</h1>
+<p class="subtitle" dir="auto">مريم — مثال تدريبي افتراضي</p>
+</div>
+<main class="body" dir="rtl"><div class="grid grid-2">
+<div class="info-card"><b>FIELD · التخصص</b><p>Commerce</p></div>
+<div class="info-card"><b>TARGET · الوظيفة</b><p>Entry-level Operations</p></div>
+<div class="info-card"><b>VERIFIED SKILLS · المهارات</b><p>Basic Microsoft Excel · Data Organisation</p></div>
+<div class="info-card"><b>EVIDENCE · الدليل</b><p>University project — organised sales records and prepared a summary table.</p></div>
+</div><div class="callout">هذه هي الحقائق نفسها التي ظهرت في ملف مريم. لا نضيف مهارة أو رقمًا أو جهة عمل غير موجودة.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المثال توضيحي. لا تستخدمه كناتج حقيقي من ChatGPT أو باعتباره سيرة جاهزة.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> نفذ الديمو أمام الطلاب بإدخال البيانات المتاحة فقط. إذا أضفت معلومات أخرى فصرّح بأنها افتراضية.</div>
+</section><section aria-hidden="true" class="slide" data-section="LIVE DEMO · WORKFLOW" data-title="الديمو: أنشئ ثم افحص ثم حسّن">
+<header class="slide-topline">
+<div><span class="slide-number">40</span><span class="section-label">GET HIRED · MODULE 05 · LIVE DEMO · WORKFLOW</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">الديمو: أنشئ ثم افحص ثم حسّن</h1>
+<p class="subtitle" dir="auto">لا تعرض مثالًا محفوظًا على أنه ناتج حي</p>
+</div>
+<main class="body" dir="rtl"><div class="outcomes"><div class="step"><span>01</span><div><b>Generate</b><p>أدخل Prompt المصدر والحقائق.</p></div></div><div class="step"><span>02</span><div><b>Inspect</b><p>هل الناتج ثلاث جمل؟ وهل أضاف معلومة غير موجودة؟</p></div></div><div class="step"><span>03</span><div><b>Challenge</b><p>هل المهارات والتخصص والقطاع دقيقة؟</p></div></div><div class="step"><span>04</span><div><b>Refine</b><p>اطلب حذف الادعاءات غير المدعومة وتحسين الوضوح.</p></div></div></div><div class="callout">إذا لم تنفذ الأداة فعليًا أمام المجموعة، سمِّ ما تعرضه Sample Output — Illustrative Example.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> يجب توضيح الأداة المستخدمة، والمدخل، وهل الناتج حي أم مثال توضيحي.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> لا تخترع واجهة أو نتيجة. إذا تعذر الاتصال، استخدم مثالًا محفوظًا مع الإفصاح عن ذلك.</div>
+</section><section aria-hidden="true" class="slide" data-section="HUMAN REVIEW · QUALITY CHECK" data-title="كيف نراجع جودة ناتج AI؟">
+<header class="slide-topline">
+<div><span class="slide-number">41</span><span class="section-label">GET HIRED · MODULE 05 · HUMAN REVIEW · QUALITY CHECK</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">كيف نراجع جودة ناتج AI؟</h1>
+<p class="subtitle" dir="auto">لا يكفي أن يبدو النص احترافيًا</p>
+</div>
+<main class="body" dir="rtl"><div class="grid grid-3"><div class="info-card"><span class='\"card-tag\"'>ACCURACY</span><b>الدقة</b><p>هل كل حقيقة صحيحة؟</p></div><div class="info-card"><span class='\"card-tag\"'>RELEVANCE</span><b>الملاءمة</b><p>هل يخدم الوظيفة؟</p></div><div class="info-card"><span class='\"card-tag\"'>EVIDENCE</span><b>الدليل</b><p>هل كل ادعاء مدعوم؟</p></div><div class="info-card"><span class='\"card-tag\"'>LANGUAGE</span><b>اللغة</b><p>هل اللغة طبيعية؟</p></div><div class="info-card"><span class='\"card-tag\"'>FORMAT</span><b>التنسيق</b><p>هل يسهل قراءته؟</p></div></div><div class="callout">احتفظ بما هو صحيح، وعدّل ما يحتاج توضيحًا، وارفض ما لا تستطيع إثباته.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> معايير التقييم مشتقة من موضوعات الجلسة وقائمة Peer Review. ليست درجة ATS رسمية.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> اطلب من الطلاب تصنيف كل عبارة: Keep / Edit / Reject مع سبب واضح.</div>
+</section><section aria-hidden="true" class="slide" data-section="RESPONSIBLE AI · CV" data-title="الاستخدام المسؤول: حماية الهوية والأدلة">
+<header class="slide-topline">
+<div><span class="slide-number">42</span><span class="section-label">GET HIRED · MODULE 05 · RESPONSIBLE AI · CV</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">الاستخدام المسؤول: حماية الهوية والأدلة</h1>
+<p class="subtitle" dir="auto">AI يساعد في الصياغة ولا يملك الحقائق</p>
+</div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="info-card"><span class='\"card-tag\"'>NEVER INVENT</span><b>لا تختلق</b><p>خبرة أو شهادة أو نتيجة أو رقمًا</p></div><div class="info-card"><span class='\"card-tag\"'>PROTECT DATA</span><b>احمِ البيانات</b><p>رقم قومي أو بيانات مالية أو كلمات مرور</p></div><div class="info-card"><span class='\"card-tag\"'>VERIFY</span><b>تحقق</b><p>التواريخ والأسماء ومستويات اللغة</p></div><div class="info-card"><span class='\"card-tag\"'>OWN THE FINAL</span><b>امتلك النسخة</b><p>اقرأ كل سطر بنفسك</p></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المراجعة البشرية والتحقق من الحقائق جزء أساسي من إعداد السيرة.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> أوقف أي نشاط يطلب مشاركة بيانات شخصية حساسة. استخدم حالة افتراضية أو بيانات منزوعة الهوية.</div>
+</section><section aria-hidden="true" class="slide" data-section="GRAMMARLY · REVIEW" data-title="Grammarly: ما الذي نراجعه؟">
+<header class="slide-topline">
+<div><span class="slide-number">43</span><span class="section-label">GET HIRED · MODULE 05 · GRAMMARLY · REVIEW</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">Grammarly: ما الذي نراجعه؟</h1>
+<p class="subtitle" dir="auto">الأخطاء، الرسمية، والوضوح</p>
+</div>
+<main class="body" dir="rtl"><div class="grid grid-3"><div class="info-card"><span class='\"card-tag\"'>CORRECTNESS</span><b>Spelling &amp; Grammar</b><p>الأخطاء الإملائية والنحوية.</p></div><div class="info-card"><span class='\"card-tag\"'>FORMALITY</span><b>Professional tone</b><p>هل اللغة مناسبة لسياق التوظيف؟</p></div><div class="info-card"><span class='\"card-tag\"'>CLARITY</span><b>Clear wording</b><p>هل الجملة مفهومة ومباشرة؟</p></div></div><div class="callout">قد تختلف خصائص Grammarly حسب الخطة والمنصة. لا تفترض أن كل ميزة متاحة مجانًا.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المصدر يحدد Grammarly لمراجعة أخطاء اللغة والرسمية والوضوح.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> اعرض فقط الميزات المتاحة في حساب المدرب وقت التنفيذ، ولا تفترض ثبات الواجهة.</div>
+</section><section aria-hidden="true" class="slide" data-section="GRAMMARLY · WORKFLOW" data-title="خطوات استخدام Grammarly">
+<header class="slide-topline">
+<div><span class="slide-number">44</span><span class="section-label">GET HIRED · MODULE 05 · GRAMMARLY · WORKFLOW</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">خطوات استخدام Grammarly</h1>
+<p class="subtitle" dir="auto">راجع الاقتراح لا شكله فقط</p>
+</div>
+<main class="body" dir="rtl"><div class="flow"><div class="flow-item"><b>01 · OPEN</b><span>افتح النص في محرر يدعمه حسابك</span></div><div class="flow-item"><b>02 · CHECK</b><span>راجع الأخطاء والوضوح والنبرة</span></div><div class="flow-item"><b>03 · DECIDE</b><span>اقبل أو ارفض مع الحفاظ على المعنى</span></div><div class="flow-item"><b>04 · PROOFREAD</b><span>اقرأ النسخة النهائية بنفسك</span></div></div><div class="callout">إذا لم تعمل الإضافة في Canva أو حقل الكتابة المستهدف، استخدم Grammarly Editor أو قائمة مراجعة يدوية.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> التوافر قد يختلف حسب الخطة والموقع الذي تكتب فيه. لا تفترض تكاملًا مضمونًا داخل Canva.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> اختبر الجهاز والحساب مسبقًا. جهز بديلًا يدويًا.</div>
+</section><section aria-hidden="true" class="slide" data-section="LANGUAGE · A2 APPLICANTS" data-title="أخطاء شائعة في CV لدى متعلمي A2">
+<header class="slide-topline">
+<div><span class="slide-number">45</span><span class="section-label">GET HIRED · MODULE 05 · LANGUAGE · A2 APPLICANTS</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">أخطاء شائعة في CV لدى متعلمي A2</h1>
+<p class="subtitle" dir="auto">ترجمة حرفية، لغة غير رسمية، وعبارات عامة</p>
+</div>
+<main class="body" dir="rtl"><div class="mistake-grid"><div class="mistake"><span>TRANSLATION ERROR</span><p class="bad english" dir="ltr">I am responsible on customer service.</p><p class="good english" dir="ltr">I was responsible for customer service.</p></div><div class="mistake"><span>INFORMAL LANGUAGE</span><p class="bad english" dir="ltr">I wanna work in a good company.</p><p class="good english" dir="ltr">I am interested in an entry-level role in [sector].</p></div><div class="mistake"><span>MISSING KEYWORDS</span><p class="bad english" dir="ltr">CV does not mention Excel, although the student used it in a project.</p><p class="good english" dir="ltr">Add Excel only with the project evidence that supports it.</p></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المصدر يذكر هذه الأنواع الثلاثة: أخطاء الترجمة، اللغة غير الرسمية، والكلمات المفتاحية المفقودة.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> اطلب من الطلاب محاولة تصحيح الجملة الأولى قبل إظهار البديل. وضح أن البدائل أمثلة تعليمية.</div>
+</section><section aria-hidden="true" class="slide" data-section="CANVA · TEMPLATE SELECTION" data-title="Canva: اختيار قالب يراعي قابلية قراءة ATS">
+<header class="slide-topline">
+<div><span class="slide-number">46</span><span class="section-label">GET HIRED · MODULE 05 · CANVA · TEMPLATE SELECTION</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">Canva: اختيار قالب يراعي قابلية قراءة ATS</h1>
+<p class="subtitle" dir="auto">التصميم يخدم المحتوى ولا يحل محله</p>
+</div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="info-card"><span class='\"card-tag\"'>CHOOSE</span><b>اختر قالبًا بسيطًا</b><p>استخدم قالبًا مجانيًا متاحًا وقت التدريب.</p></div><div class="info-card"><span class='\"card-tag\"'>STRUCTURE</span><b>عناوين مألوفة</b><p>Header · Summary · Education · Experience · Skills.</p></div><div class="info-card"><span class='\"card-tag\"'>READABILITY</span><b>نص واضح</b><p>قلل الزخرفة والعناصر التي تحجب النص.</p></div><div class="info-card"><span class='\"card-tag\"'>CUSTOMISE</span><b>خصّص التخطيط</b><p>حافظ على ترتيب منطقي ومسافات متوازنة.</p></div></div><div class="callout">وجود عبارة ATS-friendly في اسم القالب لا يضمن اجتياز أي نظام. افحص النص وتعليمات جهة التوظيف.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المصدر يطلب استخدام قوالب Canva مجانية تراعي ATS مع تخصيص التخطيط والطباعة. لا توجد ضمانة قبول عامة.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> تحقق من القوالب المجانية المتاحة وقت التدريب ولا تفترض أن كل قالب مجاني أو مناسب.</div>
+</section><section aria-hidden="true" class="slide" data-section="CANVA · DESIGN RULES" data-title="تنسيق Canva والطباعة">
+<header class="slide-topline">
+<div><span class="slide-number">47</span><span class="section-label">GET HIRED · MODULE 05 · CANVA · DESIGN RULES</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">تنسيق Canva والطباعة</h1>
+<p class="subtitle" dir="auto">قابلية القراءة أولًا، والزخرفة ثانيًا</p>
+</div>
+<main class="body" dir="rtl"><div class="grid grid-3"><div class="info-card"><span class='\"card-tag\"'>HIERARCHY</span><b>هرمية واضحة</b><p>اسم واضح وعناوين أقسام ثابتة.</p></div><div class="info-card"><span class='\"card-tag\"'>TYPOGRAPHY</span><b>خطوط متسقة</b><p>خط واحد أو خطان وأحجام قابلة للقراءة.</p></div><div class="info-card"><span class='\"card-tag\"'>COLOUR</span><b>تباين جيد</b><p>ألوان قليلة وخلفية لا تعيق القراءة.</p></div><div class="info-card"><span class='\"card-tag\"'>SPACING</span><b>مسافات كافية</b><p>لا تزاحم النص ولا تترك فراغات غير مبررة.</p></div><div class="info-card"><span class='\"card-tag\"'>EXPORT</span><b>صيغة صحيحة</b><p>اتبع تعليمات الإعلان: PDF أو DOCX أو نموذج إلكتروني.</p></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذه إرشادات تصميم مساندة. صيغة الإرسال النهائية يحددها إعلان الوظيفة أو نظام التقديم.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> لا تفرض PDF في كل الحالات؛ بعض جهات التوظيف تطلب DOCX أو تعبئة نموذج إلكتروني.</div>
+</section><section aria-hidden="true" class="slide" data-section="CANVA FINAL OUTPUT" data-title="مخرج التطبيق النهائي: السيرة الذاتية بعد التنسيق">
+<header class="slide-topline"><div><span class="slide-number">48</span><span class="section-label">GET HIRED · MODULE 05 · CANVA FINAL OUTPUT</span></div><span class="module-pill">CV OUTPUT</span></header>
+<div class="heading"><h1 dir="auto">مخرج التطبيق النهائي: السيرة الذاتية بعد التنسيق</h1><p class="subtitle" dir="auto">Canva-formatted CV — التنسيق يحسن سهولة القراءة؛ لا يضيف قيمة أو خبرة غير موجودة.</p></div>
+<main class="body" dir="rtl"><div class="cv-result-layout final-layout"><div class="cv-paper cv-final-paper"><div class="cv-name" dir="ltr">Maryam Ahmed</div><div class="cv-contact" dir="ltr">[Professional Email] | [Phone Number] | [City, Country]</div>
+<div class="cv-section-heading" dir="ltr">PROFESSIONAL SUMMARY</div><p class="cv-output-text" dir="ltr">Recent Commerce graduate with basic Microsoft Excel skills. Organised sales records and prepared a summary table as part of a university project. Interested in an entry-level operations role.</p>
+<div class="cv-section-heading" dir="ltr">EDUCATION</div><div class="cv-item-title" dir="ltr">Commerce Graduate</div><div class="cv-item-meta" dir="ltr">[University / Institution] | [Graduation Year]</div>
+<div class="cv-section-heading" dir="ltr">PROJECT EXPERIENCE</div><div class="cv-item-title" dir="ltr">University Project — Sales Records Organisation</div><ul class="cv-output-list" dir="ltr"><li>Organised project sales records using basic Microsoft Excel.</li><li>Prepared a summary table for academic review.</li></ul>
+<div class="cv-section-heading" dir="ltr">SKILLS</div><p class="cv-output-text" dir="ltr">Basic Microsoft Excel · Data Organisation · Summary Table Preparation</p>
+<div class="cv-section-heading" dir="ltr">LANGUAGES</div><p class="cv-output-text" dir="ltr">Arabic — Native · English — A2</p></div>
+<aside class="cv-explain"><div class="cv-explain-label">ماذا تغير في Canva؟</div><ul class="cv-ar-list"><li>تسلسل بصري واضح.</li><li>عناوين أقسام مألوفة.</li><li>خط مقروء وتباين مناسب.</li><li>مسافات متسقة.</li><li>تصميم أحادي العمود يسهل متابعة النص.</li></ul><div class="cv-proof"><b>تنبيه</b><p>لا يوجد قالب يضمن اجتياز كل أنظمة ATS. نختبر النص بعد التصدير.</p></div></aside></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> النسخة المنسقة تعرض المحتوى نفسه. لا تجعل الألوان أو القالب بديلًا عن صحة المعلومات أو وضوح النص.</div><div class="trainer-note"><b>ملاحظة المدرب:</b> اعرض هذه الشريحة بعد تنفيذ Canva أمام الطلاب. قارنوا النص قبل التنسيق وبعده دون تغيير أي معلومة.</div></section><section aria-hidden="true" class="slide" data-section="FINAL CV · EXPORT CHECK" data-title="فحص الملف النهائي بعد التصدير">
+<header class="slide-topline">
+<div><span class="slide-number">49</span><span class="section-label">GET HIRED · MODULE 05 · FINAL CV · EXPORT CHECK</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">فحص الملف النهائي بعد التصدير</h1>
+<p class="subtitle" dir="auto">اختبر النسخة التي سترسلها، لا ملف التصميم فقط</p>
+</div>
+<main class="body" dir="rtl"><div class="outcomes"><div class="step"><span>01</span><div><b>Export</b><p>صدّر وفق صيغة جهة التوظيف.</p></div></div><div class="step"><span>02</span><div><b>Open</b><p>افتح النسخة المصدرة نفسها.</p></div></div><div class="step"><span>03</span><div><b>Select &amp; Copy</b><p>حدد النص وانسخه إلى محرر نصوص.</p></div></div><div class="step"><span>04</span><div><b>Check</b><p>راجع ترتيب الأقسام والتواريخ والروابط.</p></div></div><div class="step"><span>05</span><div><b>Proofread</b><p>تحقق من الاسم وبيانات الاتصال والنص النهائي.</p></div></div></div><div class="callout">اختبار النسخ يكشف بعض مشكلات استخراج النص، لكنه لا يحاكي كل أنظمة ATS ولا يضمن القبول.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذا اختبار عملي محدود لفحص قابلية استخراج النص، وليس اختبار ATS كاملًا.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> نفذ الاختبار على ملف تجريبي أولًا. لا تطلب من الطلاب عرض بياناتهم الشخصية على الشاشة.</div>
+</section><section aria-hidden="true" class="slide" data-section="CV SPRINT · WORKFLOW" data-title="سير عمل CV Sprint في المصدر">
+<header class="slide-topline">
+<div><span class="slide-number">50</span><span class="section-label">GET HIRED · MODULE 05 · CV SPRINT · WORKFLOW</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">سير عمل CV Sprint في المصدر</h1>
+<p class="subtitle" dir="auto">ChatGPT → Grammarly → Canva مع مراجعة بشرية مستمرة</p>
+</div>
+<main class="body" dir="rtl"><div class="flow"><div class="flow-item"><b>CHATGPT</b><span>صياغة المسودة من الحقائق والأدلة</span></div><div class="flow-item"><b>GRAMMARLY</b><span>مراجعة الأخطاء والرسمية والوضوح</span></div><div class="flow-item"><b>CANVA</b><span>تنسيق بسيط وتصدير الملف</span></div><div class="flow-item"><b>HUMAN REVIEW</b><span>تحقق نهائي من الحقيقة والملاءمة</span></div></div><div class="callout">لا تنتقل إلى Canva قبل مراجعة المحتوى. التصميم لا يصلح ادعاءً غير صحيح.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المصدر يحدد تسلسل الأدوات ChatGPT ثم Grammarly ثم Canva. المراجعة البشرية تحكم جميع المراحل.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> أظهر أن المراجعة ليست خطوة أخيرة فقط؛ راجع الادعاءات بعد كل تعديل.</div>
+</section><section aria-hidden="true" class="slide" data-section="OFFICIAL ACTIVITY · CV SPRINT" data-title="CV Sprint: النشاط الرسمي">
+<header class="slide-topline">
+<div><span class="slide-number">51</span><span class="section-label">GET HIRED · MODULE 05 · OFFICIAL ACTIVITY · CV SPRINT</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">CV Sprint: النشاط الرسمي</h1>
+<p class="subtitle" dir="auto">ابنِ CV كاملًا باستخدام سير العمل المحدد</p>
+</div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="info-card"><span class='\"card-tag\"'>INDIVIDUAL</span><b>فردي</b><p>كل متدرب يبني CV كاملًا</p></div><div class="info-card"><span class='\"card-tag\"'>DRAFT</span><b>ChatGPT</b><p>صياغة وتنظيم</p></div><div class="info-card"><span class='\"card-tag\"'>REVIEW</span><b>Grammarly</b><p>مراجعة اللغة</p></div><div class="info-card"><span class='\"card-tag\"'>FORMAT</span><b>Canva</b><p>التنسيق</p></div></div><div class="callout">النشاط الرسمي: CV Sprint. المدرب يتنقل بين المتدربين لتقديم coaching.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> المصدر يطلب من كل مشارك بناء CV كامل باستخدام ChatGPT → Grammarly → Canva، والمدرب يتنقل للتوجيه.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> اسمح باستخدام مشروع أو تدريب أو تطوع حقيقي عند عدم وجود وظيفة سابقة. لا تشترط نشر السيرة أو التقديم الفعلي.</div>
+</section><section aria-hidden="true" class="slide" data-section="PEER REVIEW · SOURCE CHECKLIST" data-title="مراجعة الأقران: قائمة المصدر ذات العناصر العشرة">
+<header class="slide-topline">
+<div><span class="slide-number">52</span><span class="section-label">GET HIRED · MODULE 05 · PEER REVIEW · SOURCE CHECKLIST</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">مراجعة الأقران: قائمة المصدر ذات العناصر العشرة</h1>
+<p class="subtitle" dir="auto">راجع المحتوى واللغة والتنسيق، لا المظهر فقط</p>
+</div>
+<main class="body" dir="rtl"><div class="checklist-box"><div class="checklist-head"><b>10-point peer review checklist — SOURCE</b><span id="check-count">0 / 10</span></div><div class="checklist-grid"><label class="check-item"><input class="peer-check" type="checkbox"/><span>01</span><b>Header</b></label><label class="check-item"><input class="peer-check" type="checkbox"/><span>02</span><b>Summary</b></label><label class="check-item"><input class="peer-check" type="checkbox"/><span>03</span><b>Experience</b></label><label class="check-item"><input class="peer-check" type="checkbox"/><span>04</span><b>Education</b></label><label class="check-item"><input class="peer-check" type="checkbox"/><span>05</span><b>Skills</b></label><label class="check-item"><input class="peer-check" type="checkbox"/><span>06</span><b>Formatting</b></label><label class="check-item"><input class="peer-check" type="checkbox"/><span>07</span><b>ATS keywords</b></label><label class="check-item"><input class="peer-check" type="checkbox"/><span>08</span><b>Language</b></label><label class="check-item"><input class="peer-check" type="checkbox"/><span>09</span><b>Length</b></label><label class="check-item"><input class="peer-check" type="checkbox"/><span>10</span><b>Visual clarity</b></label></div><div class="progress-track"><span id="check-progress"></span></div><p class="small-note">هذه هي العناصر العشرة الواردة في المصدر. لا تضف معيارًا رقميًا آخر على أنه جزء من القائمة الرسمية.</p></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> القائمة من المصدر: Header, Summary, Experience, Education, Skills, Formatting, ATS keywords, Language, Length, Visual clarity.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> قسّم الطلاب إلى أزواج. اطلب ملاحظة واحدة قابلة للتنفيذ، ولا تشارك بيانات شخصية علنًا.</div>
+</section><section aria-hidden="true" class="slide" data-section="PEER REVIEW · FEEDBACK" data-title="كيف نقدم ملاحظات تساعد على التحسين؟">
+<header class="slide-topline">
+<div><span class="slide-number">53</span><span class="section-label">GET HIRED · MODULE 05 · PEER REVIEW · FEEDBACK</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">كيف نقدم ملاحظات تساعد على التحسين؟</h1>
+<p class="subtitle" dir="auto">التغذية الراجعة ليست تصويتًا على جمال التصميم</p>
+</div>
+<main class="body" dir="rtl"><div class="grid grid-3"><div class="info-card"><span class='\"card-tag\"'>صف ما تراه دون حكم عام.</span><b>OBSERVATION</b><p>Your CV lists Excel in Skills.</p></div><div class="info-card"><span class='\"card-tag\"'>اطلب دليلًا أو مثالًا.</span><b>QUESTION</b><p>Where did you use Excel?</p></div><div class="info-card"><span class='\"card-tag\"'>اقترح تعديلًا محددًا.</span><b>IMPROVEMENT</b><p>Add one truthful project bullet showing how you used it.</p></div></div><div class="callout">المراجعة الجيدة = ملاحظة محددة + سؤال توضيحي + تحسين قابل للتنفيذ.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذه آلية تدريبية لإثراء مراجعة الأقران، وليست جزءًا إضافيًا من قائمة المصدر ذات العناصر العشرة.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> اطلب من كل مراجع ذكر نقطة قوة واحدة وتعديل واحد واضح.</div>
+</section><section aria-hidden="true" class="slide" data-section="QUICK CHECK · KNOWLEDGE REVIEW" data-title="اختبر حكمك قبل تسليم CV">
+<header class="slide-topline">
+<div><span class="slide-number">54</span><span class="section-label">GET HIRED · MODULE 05 · QUICK CHECK · KNOWLEDGE REVIEW</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">اختبر حكمك قبل تسليم CV</h1>
+<p class="subtitle" dir="auto">اختر الإجابة ثم ناقش السبب</p>
+</div>
+<main class="body" dir="rtl">
+<div class="quiz-wrap">
+<div class="quiz-q" data-answer="b">
+<h3>1. الإعلان يطلب Excel ولديك مشروع استخدمته فيه. ماذا تفعل؟</h3>
+<button data-choice="a">تكتب Advanced Excel دون دليل.</button>
+<button data-choice="b">تذكر استخدام Excel في المشروع وتصف المهمة.</button>
+<button data-choice="c">تضيف Excel مخفية باللون الأبيض.</button>
+<p aria-live="polite" class="feedback"></p>
+</div>
+<div class="quiz-q" data-answer="c">
+<h3>2. Canva يعرض قالبًا باسم ATS. ماذا يعني ذلك؟</h3>
+<button data-choice="a">يضمن القبول في كل نظام.</button>
+<button data-choice="b">يغني عن مراجعة النص.</button>
+<button data-choice="c">لا يضمن القبول؛ يجب فحص قابلية القراءة واتباع تعليمات الجهة.</button>
+<p aria-live="polite" class="feedback"></p>
+</div>
+<div class="quiz-q" data-answer="a">
+<h3>3. Grammarly اقترح تعديلًا يغير معنى إنجازك. ماذا تفعل؟</h3>
+<button data-choice="a">ترفضه أو تعدله حتى يبقى المعنى صحيحًا.</button>
+<button data-choice="b">تقبله لأن الأداة اقترحته.</button>
+<button data-choice="c">تحذف الدليل كله.</button>
+<p aria-live="polite" class="feedback"></p>
+</div>
+</div>
+</main>
+<div class="study-extra"><b>للمذاكرة:</b> الإجابات الصحيحة: 1-b، 2-c، 3-a. اطلب تفسيرًا لا مجرد اختيار.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> استخدم الأسئلة بعد الممارسة، ولا تجعلها بديلًا عن مراجعة السيرة نفسها.</div>
+</section><section aria-hidden="true" class="slide" data-section="DELIVERABLES · TRACK BOUNDARIES" data-title="مخرجات اليوم الخامس وتوزيعها على المسارات">
+<header class="slide-topline">
+<div><span class="slide-number">55</span><span class="section-label">GET HIRED · MODULE 05 · DELIVERABLES · TRACK BOUNDARIES</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">مخرجات اليوم الخامس وتوزيعها على المسارات</h1>
+<p class="subtitle" dir="auto">ما يخص AI Tools وما يخص المسارات الأخرى</p>
+</div>
+<main class="body" dir="rtl"><div class="grid grid-2"><div class="info-card"><span class='\"card-tag\"'>AI TOOLS</span><b>ATS-compatible CV</b><p>Complete · Grammarly-checked · Canva-formatted</p></div><div class="info-card"><span class='\"card-tag\"'>AI TOOLS SUPPORT</span><b>Prompt card set</b><p>5 AI prompts for CV writing — mapping remains subject to approval</p></div><div class="info-card"><span class='\"card-tag\"'>COMMUNICATION &amp; SOFT SKILLS</span><b>Personal Brand Statement</b><p>30-second pitch</p></div><div class="info-card"><span class='\"card-tag\"'>BUSINESS ENGLISH</span><b>Cover Letter</b><p>Boss Battle 1 product — assessed against its rubric</p></div></div><div class="callout">المخرج الأساسي الذي نتحقق منه في هذه الجلسة هو CV. لا ننسب مخرجات المسارات الأخرى إلى AI Tools.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> التصنيف يستند إلى توزيع مخرجات اليوم في المصدر. Prompt card set داعم لعمل CV.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> عند التقييم، لا تطلب Cover Letter كجزء من CV Sprint.</div>
+</section><section aria-hidden="true" class="slide" data-section="TAKE-HOME · TRAINER SUGGESTION" data-title="تكليف بعد الجلسة: سجل تحسين CV">
+<header class="slide-topline">
+<div><span class="slide-number">56</span><span class="section-label">GET HIRED · MODULE 05 · TAKE-HOME · TRAINER SUGGESTION</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">تكليف بعد الجلسة: سجل تحسين CV</h1>
+<p class="subtitle" dir="auto">حوّل ملاحظات اليوم إلى نسخة أفضل</p>
+</div>
+<main class="body" dir="rtl"><div class="outcomes"><div class="step"><span>01</span><div><b>احفظ النسخة الأولى</b><p>احتفظ بمسودة CV قبل المراجعة.</p></div></div><div class="step"><span>02</span><div><b>احفظ النسخة المنقحة</b><p>احتفظ بالنسخة بعد مراجعة اللغة.</p></div></div><div class="step"><span>03</span><div><b>احفظ النسخة المنسقة</b><p>احتفظ بملف Canva المصدر والنسخة المصدرة.</p></div></div><div class="step"><span>04</span><div><b>وثق قراراتك</b><p>اكتب ثلاثة تعديلات أجريتها بنفسك وسببها.</p></div></div><div class="step"><span>05</span><div><b>راجع إعلانًا</b><p>استخرج كلمات مفتاحية تدعمها أدلتك الحقيقية.</p></div></div></div><div class="callout">هذا تكليف تثبيت مقترح للمدرب، وليس مخرجًا إضافيًا منصوصًا عليه في قائمة المصدر.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> هذا واجب مقترح لدعم الاستمرار. لا يضاف إلى المخرجات الرسمية إلا بعد اعتماد البرنامج.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> لا تطلب من الطلاب التقديم الفعلي للوظائف أو مشاركة ملفاتهم الخاصة علنًا.</div>
+</section><section aria-hidden="true" class="slide" data-section="FINAL CHECK · CV" data-title="قائمة المراجعة النهائية قبل إرسال CV">
+<header class="slide-topline">
+<div><span class="slide-number">57</span><span class="section-label">GET HIRED · MODULE 05 · FINAL CHECK · CV</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">قائمة المراجعة النهائية قبل إرسال CV</h1>
+<p class="subtitle" dir="auto">تأكد من المحتوى واللغة والصيغة</p>
+</div>
+<main class="body" dir="rtl"><div class="grid grid-3"><div class="info-card"><b>CONTENT</b><p>كل معلومة صحيحة وقابلة للإثبات.</p></div><div class="info-card"><b>STRUCTURE</b><p>الأقسام واضحة والعناوين مألوفة.</p></div><div class="info-card"><b>KEYWORDS</b><p>مرتبطة بالوظيفة ومدعومة بدليل.</p></div><div class="info-card"><b>LANGUAGE</b><p>سليمة وواضحة ورسمية.</p></div><div class="info-card"><b>FORMAT</b><p>تخطيط بسيط ونص قابل للتحديد.</p></div><div class="info-card"><b>INSTRUCTIONS</b><p>صيغة الملف وفق طلب صاحب العمل.</p></div></div></main>
+<div class="study-extra"><b>للمذاكرة:</b> قائمة ختامية مشتقة من محتوى الجلسة. لا تحل محل تعليمات جهة التوظيف.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> اطلب من كل طالب تحديد نقطة واحدة سيصلحها قبل إرسال CV.</div>
+</section><section aria-hidden="true" class="slide" data-section="CLOSING · MY BRAND" data-title="AI يساعدك على الصياغة؛ والدليل يجعل CV موثوقًا">
+<header class="slide-topline">
+<div><span class="slide-number">58</span><span class="section-label">GET HIRED · MODULE 05 · CLOSING · MY BRAND</span></div>
+<span class="module-pill">MY BRAND</span>
+</header>
+<div class="heading">
+<h1 dir="auto">AI يساعدك على الصياغة؛ والدليل يجعل CV موثوقًا</h1>
+<p class="subtitle" dir="auto">MY BRAND · CV BUILDING WITH AI TOOLS</p>
+</div>
+<main class="body" dir="rtl"><div class="closing-grid"><div><b>FACTS</b><span>ابدأ بحقائقك</span></div><div><b>DRAFT</b><span>استخدم AI للمسودة</span></div><div><b>REVIEW</b><span>راجع اللغة والمعنى</span></div><div><b>FORMAT</b><span>نسّق بوضوح</span></div><div><b>OWN</b><span>أنت مسؤول عن النسخة النهائية</span></div></div><h2 class="closing-line">AI helps you draft. Your evidence makes the CV credible.</h2><div class="callout">السيرة الذاتية ليست إعلانًا عن شخص تتمنى أن تكونه؛ إنها عرض منظم لما تستطيع إثباته.</div></main>
+<div class="study-extra"><b>للمذاكرة:</b> الخلاصة: AI يسرّع التنظيم والصياغة، لكن الدقة والملاءمة وصدق المعلومات مسؤولية صاحب السيرة.</div>
+<div class="trainer-note"><b>ملاحظة المدرّب:</b> اختم بسؤال: ما العبارة التي ستراجعها مرة أخرى قبل إرسال سيرتك؟</div>
+</section></main>
+<footer class="navbar">
+<button id="prev">السابق ←</button>
+<div class="nav-center">
+<div class="progress"><span id="progress-fill"></span></div>
+<span class="counter" id="counter">01 / 57</span>
+<span id="mode-label">وضع العرض</span>
+</div>
+<button class="primary" id="next">التالي →</button>
+</footer>
+</div>
+<div aria-label="فهرس الشرائح" aria-modal="true" id="overview-panel" role="dialog">
+<div class="overview-inner">
+<div class="overview-head">
+<h2>فهرس Module 05 — MY BRAND</h2>
+<input id="overview-search" placeholder="ابحث عن عنوان شريحة..." type="search"/>
+<button id="close-overview">إغلاق</button>
+</div>
+<div class="overview-grid" id="overview-list"></div>
+</div>
+</div>
+<div aria-live="polite" class="toast" id="toast" role="status">تم النسخ</div>
+<script>
+(() => {
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const $ = id => document.getElementById(id);
+  let current = 0;
+  const modeButtons = Array.from(document.querySelectorAll('[data-mode]'));
+
+  function showSlide(index) {
+    current = Math.max(0, Math.min(slides.length - 1, index));
+    slides.forEach((slide, i) => {
+      const active = i === current;
+      slide.classList.toggle('active', active);
+      slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+    });
+    $('counter').textContent = String(current + 1).padStart(2,'0') + ' / ' + String(slides.length).padStart(2,'0');
+    $('progress-fill').style.width = ((current + 1) / slides.length * 100) + '%';
+    $('prev').disabled = current === 0;
+    $('next').disabled = current === slides.length - 1;
+    slides[current].scrollTop = 0;
+  }
+
+  $('prev').addEventListener('click', () => showSlide(current - 1));
+  $('next').addEventListener('click', () => showSlide(current + 1));
+
+  function setMode(mode) {
+    document.body.dataset.mode = mode;
+    document.body.classList.toggle('mode-study', mode === 'study');
+    document.body.classList.toggle('mode-trainer', mode === 'trainer');
+    modeButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.mode === mode));
+    $('mode-label').textContent = mode === 'presentation' ? 'وضع العرض' : mode === 'study' ? 'مذاكرة الطالب' : 'ملاحظات المدرّب';
+  }
+  modeButtons.forEach(btn => btn.addEventListener('click', () => setMode(btn.dataset.mode)));
+
+  const overviewPanel = $('overview-panel');
+  const overviewList = $('overview-list');
+  const overviewSearch = $('overview-search');
+  slides.forEach((slide, i) => {
+    const button = document.createElement('button');
+    const number = document.createElement('small');
+    const label = document.createElement('span');
+    number.textContent = String(i + 1).padStart(2,'0');
+    label.textContent = slide.dataset.title || ('Slide ' + (i + 1));
+    button.append(number, label);
+    button.addEventListener('click', () => {
+      showSlide(i);
+      overviewPanel.style.display = 'none';
+    });
+    overviewList.appendChild(button);
+  });
+  $('overview').addEventListener('click', () => {
+    overviewPanel.style.display = 'block';
+    overviewSearch.value = '';
+    filterOverview('');
+    overviewSearch.focus();
+  });
+  $('close-overview').addEventListener('click', () => overviewPanel.style.display = 'none');
+  overviewPanel.addEventListener('click', e => {
+    if (e.target === overviewPanel) overviewPanel.style.display = 'none';
+  });
+  function filterOverview(term) {
+    const q = term.trim().toLowerCase();
+    Array.from(overviewList.children).forEach(button => {
+      button.style.display = button.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+    });
+  }
+  overviewSearch.addEventListener('input', e => filterOverview(e.target.value));
+
+  $('fullscreen').addEventListener('click', async () => {
+    try {
+      if (!document.fullscreenElement) await document.documentElement.requestFullscreen();
+      else await document.exitFullscreen();
+    } catch (e) {
+      $('toast').textContent = 'استخدم خيار ملء الشاشة في المتصفح إذا تعذر تفعيله هنا.';
+      $('toast').classList.add('show');
+      window.setTimeout(() => $('toast').classList.remove('show'), 1800);
+    }
+  });
+
+  async function copyText(text, button) {
+    let copied = false;
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        copied = true;
+      }
+    } catch (e) {}
+    if (!copied) {
+      const area = document.createElement('textarea');
+      area.value = text;
+      area.setAttribute('readonly','');
+      area.style.position = 'fixed';
+      area.style.opacity = '0';
+      document.body.appendChild(area);
+      area.select();
+      try { copied = document.execCommand('copy'); } catch (e) {}
+      area.remove();
+    }
+    const toast = $('toast');
+    toast.textContent = copied ? 'تم النسخ' : 'تعذر النسخ تلقائيًا — حدد النص وانسخه';
+    toast.classList.add('show');
+    if (button && copied) {
+      const old = button.textContent;
+      button.textContent = 'تم النسخ';
+      window.setTimeout(() => button.textContent = old, 1300);
+    }
+    window.setTimeout(() => toast.classList.remove('show'), 1800);
+  }
+
+  document.addEventListener('click', e => {
+    const button = e.target.closest('[data-copy]');
+    if (button) copyText(button.dataset.copy, button);
+  });
+
+  $('build-prompt').addEventListener('click', () => {
+    const val = id => $(id).value.trim();
+    const role = val('b-role');
+    const tasks = val('b-tasks');
+    const tools = val('b-tools');
+    const evidence = val('b-evidence');
+    const prompt = [
+      'Help me write truthful CV bullet points for this target role: ' + (role || '[target role]'),
+      'My real task or project notes: ' + (tasks || '[add factual notes]'),
+      'Tools I actually used: ' + (tools || '[list only tools you used]'),
+      'Evidence or output: ' + (evidence || '[describe a real output]'),
+      'Use only the facts above. Do not invent employers, dates, qualifications, skills, achievements, or numbers. If information is missing, ask questions instead of guessing. Write clear, concise professional English.'
+    ].join('\n');
+    $('generated-prompt').textContent = prompt;
+    $('copy-generated').disabled = false;
+  });
+  $('copy-generated').addEventListener('click', () => {
+    if (!$('copy-generated').disabled) copyText($('generated-prompt').textContent, $('copy-generated'));
+  });
+
+  document.querySelectorAll('.peer-check').forEach(input => {
+    input.addEventListener('change', () => {
+      const checks = Array.from(document.querySelectorAll('.peer-check'));
+      const count = checks.filter(x => x.checked).length;
+      $('check-count').textContent = count + ' / ' + checks.length;
+      $('check-progress').style.width = (count / checks.length * 100) + '%';
+    });
+  });
+
+  document.querySelectorAll('.quiz-q').forEach(question => {
+    question.querySelectorAll('button[data-choice]').forEach(button => {
+      button.addEventListener('click', () => {
+        const correct = button.dataset.choice === question.dataset.answer;
+        question.querySelectorAll('button').forEach(option => {
+          option.classList.remove('correct','incorrect');
+          if (option.dataset.choice === question.dataset.answer) option.classList.add('correct');
+        });
+        if (!correct) button.classList.add('incorrect');
+        question.querySelector('.feedback').textContent = correct ? 'إجابة صحيحة. اشرح السبب.' : 'ليست الإجابة الأدق. راجع التفسير المرتبط بالسؤال.';
+      });
+    });
+  });
+
+  document.addEventListener('keydown', e => {
+    const tag = (e.target && e.target.tagName || '').toLowerCase();
+    if (['input','textarea','select','button'].includes(tag) || e.target.isContentEditable) {
+      if (e.key === 'Escape' && overviewPanel.style.display === 'block') overviewPanel.style.display = 'none';
+      return;
+    }
+    if (overviewPanel.style.display === 'block') {
+      if (e.key === 'Escape') overviewPanel.style.display = 'none';
+      return;
+    }
+    if (e.key === 'ArrowLeft' || e.key === 'PageDown' || e.key === ' ') {
+      e.preventDefault(); showSlide(current + 1);
+    } else if (e.key === 'ArrowRight' || e.key === 'PageUp') {
+      e.preventDefault(); showSlide(current - 1);
+    } else if (e.key === 'Home') {
+      showSlide(0);
+    } else if (e.key === 'End') {
+      showSlide(slides.length - 1);
+    } else if (e.key.toLowerCase() === 'f') {
+      $('fullscreen').click();
+    } else if (e.key.toLowerCase() === 'o') {
+      $('overview').click();
+    }
+  });
+
+  showSlide(0);
+})();
+</script>
+</body>
+</html>
