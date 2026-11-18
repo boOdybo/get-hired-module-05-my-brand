@@ -1,4 +1,13 @@
-# GET HIRED — Module 05: MY BRAND (Case-Based Revision)
+# GET HIRED — Module 05: MY BRAND
+
+[افتح العرض المحدّث](https://boodybo.github.io/get-hired-module-05-my-brand/) · [فهرس الوحدات 01–15](https://boodybo.github.io/get-hired-module-06-my-digital-presence/modules.html)
+
+النسخة الحالية في `docs/index.html` وتضم 13 شريحة بالصور والحركة وخط Alexandria. ابنِ CV من حقائق مريم، ثم مرّره عبر مراجعة اللغة والتنسيق وقائمة تدقيق من عشر نقاط.
+
+يعمل العرض محليًا عند فتح الملف مباشرة. استخدم الفهرس أو الأسهم للانتقال بين الشرائح.
+
+<details>
+<summary>إرشادات الإصدار السابق وملفاته المساندة</summary>
 
 [فتح العرض التفاعلي](https://boodybo.github.io/get-hired-module-05-my-brand/)
 
@@ -32,3 +41,5 @@ Presentation / Study / Trainer modes; Previous / Next; keyboard navigation; sear
 
 ## Important source note
 The source lists seven CV sections and five AI prompts but does not explain the grouping. The source Summary prompt is preserved verbatim; the other four prompt templates are trainer-designed and provisional.
+
+</details>
